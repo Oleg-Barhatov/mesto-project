@@ -22,19 +22,8 @@
 @import url(../blocks/element/__like/element__like.css);
 @import url(../blocks/element/__like/_invisible/element__like_invisible.css);
 @import url(../blocks/element/__pseudo-like/element__pseudo-like.css);
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyrigth/footer__copyrigth.css);
 
-.footer {
-  max-width: 880px;
-  margin: 0 auto;
-  padding-bottom: 60px;
-}
 
-.footer__copyrigth {
-  margin: 0 auto;
-  font-family: 'Inter';
-  font-weight: 400;
-  font-size: 1.125rem;
-  line-height: 21.78px;
-  color: #545454;
-}
 

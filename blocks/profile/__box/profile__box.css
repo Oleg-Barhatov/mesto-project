@@ -3,3 +3,9 @@
   align-items: center;
   gap: 18px;
 }
+
+@media  screen and (max-width: 700px){
+  .profile__box {
+    gap: 10px;
+  }
+}
