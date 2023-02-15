@@ -1,0 +1,7 @@
+.element__like_invisible:hover + .element__pseudo-like_visible {
+  background-image: url(../../../../images/Element-like-hover.svg);
+}
+
+.element__like_invisible:checked + .element__pseudo-like_visible {
+  background-image: url(../../../../images/Element-like-checked.svg);
+}

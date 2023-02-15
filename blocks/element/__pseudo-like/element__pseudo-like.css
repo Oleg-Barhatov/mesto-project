@@ -1,0 +1,8 @@
+.element__pseudo-like {
+  display: inline-block;
+  vertical-align: middle;
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../images/Element-like.svg);
+  cursor: pointer;
+}
