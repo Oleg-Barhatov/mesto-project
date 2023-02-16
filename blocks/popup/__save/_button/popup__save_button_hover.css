@@ -1,0 +1,4 @@
+.popup__save_button_hover:hover {
+  opacity: .8;
+  border-radius: 2px;
+}
