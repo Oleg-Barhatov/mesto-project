@@ -1,16 +1,17 @@
 .popup__close {
-  width: 32px;
   height: 32px;
   position: absolute;
   right: 0;
   top: 0;
   transform: translate(40px, -48px);
   cursor: pointer;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 @media screen and (max-width: 550px) {
   .popup__close {
-    width: 20px;
     height: 20px;
     transform: translate(0px, -36px);
   }

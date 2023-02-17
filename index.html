@@ -7,11 +7,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Третий проект по верстке, адаптивный макет"/>
-    <meta name="keywords" content="HTML5, CSS3, FlexBox, Figma"/>
-    <meta name="author" content="Oleg Barhatov"/>
+    <meta name="description" content="Третий проект по верстке, адаптивный макет">
+    <meta name="keywords" content="HTML5, CSS3, FlexBox, Figma">
+    <meta name="author" content="Oleg Barhatov">
     <link rel="stylesheet" href="./pages/index.css">
-    <title>Mesto</title>
+    <title>Место</title>
 
 </head>
 
@@ -28,28 +28,28 @@
         <section class="profile">
 
           <img class="profile__avatar" src="./images/Profile.png" alt="Фото профиля">
-
           <div class="profile__info">
             <div class="profile__box">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
-              <img class="profile__pencil active" src="./images/Profile-pen.svg" alt="Редактировать профиль">
+              <button class="profile__redact-button active" type="button" name="profile__redact-button">
+                <img class="profile__image-pencil" src="./images/Profile-pen.svg" alt="Редактировать профиль">
+              </button>
             </div>
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
-          <img class="profile__add-button active" src="./images/Profile-plus.svg" alt="Кнопка добавить">
+          <button class="profile__add-button active" type="button" name="profile__add-button">
+            <img class="profile__image-button" src="./images/Profile-plus.svg" alt="Кнопка добавить">
+          </button>
 
         </section>
       
-        <section class="elements">
+        <div class="elements">
 
           <article class="element">
             <img class="element__image" src="./images/Element-Karachaevsk.png" alt="Карачаевск">
             <div class="element__box">
               <h2 class="element__title">Карачаевск</h2>
-              <label class="element__like-checkbox">
-                <input type="checkbox" class="element__like element__like_invisible">
-                <span class="element__pseudo-like element__pseudo-like_visible"></span>
-              </label>
+              <button type="button" class="element__like-button"  name="element__like-button"></button>
             </div>
           </article>
 
@@ -57,10 +57,7 @@
             <img class="element__image" src="./images/Elemet-Еlbrus.png" alt="Гора Эльбрус">
             <div class="element__box">
               <h2 class="element__title">Гора Эльбрус</h2>
-              <label class="element__like-checkbox">
-                <input type="checkbox" class="element__like element__like_invisible">
-                <span class="element__pseudo-like element__pseudo-like_visible"></span>
-              </label>
+                <button type="button" class="element__like-button"  name="element__like-button"></button>
             </div>
           </article>
 
@@ -68,10 +65,7 @@
             <img class="element__image" src="./images/Element-dombay.png" alt="Домбай">
             <div class="element__box">
               <h2 class="element__title">Домбай</h2>
-              <label class="element__like-checkbox">
-                <input type="checkbox" class="element__like element__like_invisible">
-                <span class="element__pseudo-like element__pseudo-like_visible"></span>
-              </label>
+              <button type="button" class="element__like-button"  name="element__like-button"></button>
             </div>
           </article>
 
@@ -79,10 +73,7 @@
             <img class="element__image" src="./images/Elemet-Еlbrus.png" alt="Эльбрус">
             <div class="element__box">
               <h2 class="element__title">Гора Эльбрус</h2>
-              <label class="element__like-checkbox">
-                <input type="checkbox" class="element__like element__like_invisible">
-                <span class="element__pseudo-like element__pseudo-like_visible"></span>
-              </label>
+              <button type="button" class="element__like-button"  name="element__like-button"></button>
             </div>
           </article>
 
@@ -90,10 +81,7 @@
             <img class="element__image" src="./images/Element-dombay.png" alt="Домбай">
             <div class="element__box">
               <h2 class="element__title">Домбай</h2>
-              <label class="element__like-checkbox">
-                <input type="checkbox" class="element__like element__like_invisible">
-                <span class="element__pseudo-like element__pseudo-like_visible"></span>
-              </label>
+              <button type="button" class="element__like-button"  name="element__like-button"></button>
             </div>
           </article>
 
@@ -101,14 +89,11 @@
             <img class="element__image" src="./images/Element-Karachaevsk.png" alt="Карачаевск">
             <div class="element__box">
               <h2 class="element__title">Карачаево-Черкесия</h2>
-              <label class="element__like-checkbox">
-                <input type="checkbox" class="element__like element__like_invisible">
-                <span class="element__pseudo-like element__pseudo-like_visible"></span>
-              </label>
-              </div>
+              <button type="button" class="element__like-button"  name="element__like-button"></button>
+            </div>
           </article>
 
-        </section>
+        </div>
 
       </main>
       
@@ -117,15 +102,17 @@
     </footer>
 
     <div class="popup popup_opened">
-      <form class="popup__container"> 
-          <h3 class="popup__heading">Редактировать профиль</h3>
-          <fieldset class="popup__input-container">
-            <input type="text" class="popup__form popup__form_input_focus" name="Name" placeholder="Жак-Ив Кусто" required>
-            <input type="text" class="popup__form popup__form_input_focus" name="Job" placeholder="Исследователь океана" required>
-          </fieldset>
-        <button type="submit" class="popup__save popup__save_button_hover popup__save_button_focus">Cохранить</button>
-        <img  class="popup__close popup__close_icon_hover" src="./images/PopUp-CloseIcon.svg" alt="Закрыть">
-      </form>
+      <div class="popup__container">
+        <h3 class="popup__heading">Редактировать профиль</h3>
+        <form class="popup__forms" name="popup__forms"> 
+            <fieldset class="popup__input-container">
+              <input type="text" class="popup__form" name="popup__form-name" placeholder="Жак-Ив Кусто" required>
+              <input type="text" class="popup__form" name="popup__form-job" placeholder="Исследователь океана" required>
+              <button type="submit" class="popup__save-button" name="popup__save-button">Cохранить</button>
+            </fieldset>        
+        </form>
+        <button type="button" class="popup__close active"><img class="popup__image-close" src="./images/PopUp-CloseIcon.svg" alt="Закрыть"></button>
+      </div> 
     </div>
 
   </div>

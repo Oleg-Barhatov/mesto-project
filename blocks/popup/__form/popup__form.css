@@ -12,3 +12,9 @@
 .popup__form::placeholder {
   color: #000000;
  }
+
+ .popup__form:focus {
+  outline-color: rgb(0%, 0%, 0%, 0.5);
+  scale: 1.02;
+  transition: .2s linear;
+ }

@@ -10,7 +10,7 @@
   color: #FFFFFF;
 }
 
-@media  screen and (max-width: 700px){
+@media  screen and (max-width: 720px){
   .profile__title {
     font-size: 1.687rem;
     line-height: 32.68px;

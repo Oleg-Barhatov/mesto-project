@@ -1,0 +1,18 @@
+.element__like-button {
+  width: 22px;
+  height: 19px;
+  border: 0;
+  background: transparent;
+  background-color: #FFFFFF;
+  background-image: url(../../../images/Element-like.svg);
+  background-size: cover;
+  cursor: pointer;
+}
+
+.element__like-button:hover {
+  background-image: url(../../../images/Element-like-hover.svg);
+}
+
+.element__like-button:focus {
+  background-image: url(../../../images/Element-like-checked.svg);
+}

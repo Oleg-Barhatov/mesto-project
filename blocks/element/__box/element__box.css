@@ -1,5 +1,6 @@
 .element__box {
   max-width: 87.23%;
+  height: 23px;
   display: flex;
   justify-content: space-between;
   align-items: center;
