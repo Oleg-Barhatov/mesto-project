@@ -10,7 +10,7 @@
 }
 
 .element__like-button:hover {
-  background-image: url(../../../images/Element-like-hover.svg);
+  opacity: .5;
 }
 
 .element__like-button:focus {
