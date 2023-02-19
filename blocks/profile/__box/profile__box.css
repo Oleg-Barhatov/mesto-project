@@ -7,7 +7,6 @@
 @media  screen and (max-width: 700px){
   .profile__box {
     padding-left: 16.32%;
-    max-height: 26px;
     gap: 10px;
   }
 }
