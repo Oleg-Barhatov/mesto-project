@@ -37,7 +37,7 @@
             </div>
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
-          <button class="profile__add-button active" type="button" name="profile__add-button">
+          <button class="profile__add-button active" id='openButton' type="button" name="profile__add-button">
             <img class="profile__image-button" src="./images/Profile-plus.svg" alt="Кнопка добавить">
           </button>
 
@@ -46,51 +46,57 @@
         <section class="elements">
 
           <article class="element">
-            <img class="element__image" src="./images/Element-Karachaevsk.png" alt="Карачаевск">
+            <img class="element__image" src="./images/kualaLumpur.png" alt="Карачаевск">
             <div class="element__box">
-              <h2 class="element__title">Карачаевск</h2>
+              <h2 class="element__title">Kuala-Lumpur</h2>
               <button type="button" class="element__like-button"  name="element__like-button"></button>
             </div>
+            <button type="button" class="element__delete-button"></button>
           </article>
 
           <article class="element">
-            <img class="element__image" src="./images/Elemet-Еlbrus.png" alt="Гора Эльбрус">
+            <img class="element__image" src="./images/MoscowRussia.png" alt="Гора Эльбрус">
             <div class="element__box">
-              <h2 class="element__title">Гора Эльбрус</h2>
+              <h2 class="element__title">Moscow, Russia</h2>
                 <button type="button" class="element__like-button"  name="element__like-button"></button>
             </div>
+            <button type="button" class="element__delete-button"></button>
           </article>
 
           <article class="element">
-            <img class="element__image" src="./images/Element-dombay.png" alt="Домбай">
+            <img class="element__image" src="./images/parisFrance.png" alt="Домбай">
             <div class="element__box">
-              <h2 class="element__title">Домбай</h2>
+              <h2 class="element__title">Paris, France</h2>
               <button type="button" class="element__like-button"  name="element__like-button"></button>
             </div>
+            <button type="button" class="element__delete-button"></button>
           </article>
 
           <article class="element">
-            <img class="element__image" src="./images/Elemet-Еlbrus.png" alt="Эльбрус">
+            <img class="element__image" src="./images/Shanghai.png" alt="Эльбрус">
             <div class="element__box">
-              <h2 class="element__title">Гора Эльбрус</h2>
+              <h2 class="element__title">Shanghai, China</h2>
               <button type="button" class="element__like-button"  name="element__like-button"></button>
             </div>
+            <button type="button" class="element__delete-button"></button>
           </article>
 
           <article class="element">
-            <img class="element__image" src="./images/Element-dombay.png" alt="Домбай">
+            <img class="element__image" src="./images/toronto.png" alt="Домбай">
             <div class="element__box">
-              <h2 class="element__title">Домбай</h2>
+              <h2 class="element__title">Toronto, Canada</h2>
               <button type="button" class="element__like-button"  name="element__like-button"></button>
             </div>
+            <button type="button" class="element__delete-button"></button>
           </article>
 
           <article class="element">
-            <img class="element__image" src="./images/Element-Karachaevsk.png" alt="Карачаевск">
+            <img class="element__image" src="./images/SaintPt.jpg" alt="Карачаевск">
             <div class="element__box">
-              <h2 class="element__title">Карачаево-Черкесия</h2>
+              <h2 class="element__title">Saint-Petersburg</h2>
               <button type="button" class="element__like-button"  name="element__like-button"></button>
             </div>
+            <button type="button" class="element__delete-button"></button>
           </article>
 
         </section>
@@ -101,22 +107,56 @@
       <p class="footer__copyrigth">© 2023 Mesto Russia</p>
     </footer>
 
-    <div class="popup popup_opened">
+    <div class="popup">
       <div class="popup__container">
         <h3 class="popup__heading">Редактировать профиль</h3>
-        <form class="popup__forms" name="popup__forms"> 
+        <form class="popup__forms"> 
             <fieldset class="popup__input-container">
-              <input type="text" class="popup__form" name="popup__form-name" placeholder="Жак-Ив Кусто" required>
-              <input type="text" class="popup__form" name="popup__form-job" placeholder="Исследователь океана" required>
-              <button type="submit" class="popup__save-button" name="popup__save-button">Cохранить</button>
+              <input type="text" class="popup__form popup__form-Name" value="Жак-Ив Кусто" required>
+              <input type="text" class="popup__form popup__form-Job"  value="Исследователь океана" required>
+              <button type="submit"  class="popup__save-button" name="popup__save-button">Cохранить</button>
             </fieldset>        
         </form>
-        <button type="button" class="popup__close active"><img class="popup__image-close" src="./images/PopUp-CloseIcon.svg" alt="Закрыть"></button>
+        <button type="button" class="popup__close active"></button>
       </div> 
     </div>
+    openButton popup__button-close
+    <div class="popup popup_place">
+      <div class="popup__container">
+        <h3 class="popup__heading">Новое место</h3>
+        <form class="popup__forms"> 
+            <fieldset class="popup__input-container">
+              <input type="text" id="inputTitle" class="popup__form" placeholder="Название" required>
+              <input type="text" id="inputLink" class="popup__form"  placeholder="Ссылка на картинку" required>
+              <button type="submit" id='buttonCardSave' class="popup__save-button" name="popup__save-button">Cохранить</button>
+            </fieldset>        
+        </form>
+        <button type="button" id='popupClosed' class="popup__close active"></button>
+      </div> 
+    </div>
+  </div> 
 
+  <div class="popup popup_image">
+    <figure class="popup__content">
+      <img src="" alt="" class="popup__picture">
+      <figcaption class="popup__figcaption"></figcaption>
+      <button type="button" class="popup__close active"></button>
+    </figure>
   </div>
 
+  <template id="templateElement">
+    <article class="element">
+      <img class="element__image">
+      <div class="element__box">
+        <h2 class="element__title"></h2>
+        <button type="button" class="element__like-button"  name="element__like-button"></button>
+      </div>
+      <button type="button" class="element__delete-button"></button>
+    </article>
+  </template>
+
+<script src="./cardsArr.js"></script>
+<script src="./script.js"></script>
 </body>
 
 </html>
