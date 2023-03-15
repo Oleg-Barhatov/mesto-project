@@ -8,7 +8,6 @@ function closeModal(element) {
 iconsClose.forEach(item => {
   item.addEventListener("click", event => {
     const element = event.target.closest('.popup');
-    formCardSave.reset();
     closeModal(element)
   })
 })
@@ -32,7 +31,7 @@ const inputJob = document.querySelector(".popup__form-Job");
 const popupAddCard = document.querySelector('.popup_place')
 
 buttonRedact.addEventListener("click", () => openModal(popupProfile, resetInput(inputName, inputJob)) );
-buttonPlus.addEventListener("click", () => openModal(popupAddCard) );
+buttonPlus.addEventListener("click", () => {openModal(popupAddCard), formCardSave.reset()});
 
 const popupForm = document.querySelector(".popup_profile");
 
