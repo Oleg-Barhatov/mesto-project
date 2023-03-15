@@ -44,61 +44,6 @@
         </section>
       
         <section class="elements">
-
-          <article class="element">
-            <img class="element__image" src="./images/kualaLumpur.png" alt="Карачаевск">
-            <div class="element__box">
-              <h2 class="element__title">Kuala-Lumpur</h2>
-              <button type="button" class="element__like-button"  name="element__like-button"></button>
-            </div>
-            <button type="button" class="element__delete-button"></button>
-          </article>
-
-          <article class="element">
-            <img class="element__image" src="./images/MoscowRussia.png" alt="Гора Эльбрус">
-            <div class="element__box">
-              <h2 class="element__title">Moscow, Russia</h2>
-                <button type="button" class="element__like-button"  name="element__like-button"></button>
-            </div>
-            <button type="button" class="element__delete-button"></button>
-          </article>
-
-          <article class="element">
-            <img class="element__image" src="./images/parisFrance.png" alt="Домбай">
-            <div class="element__box">
-              <h2 class="element__title">Paris, France</h2>
-              <button type="button" class="element__like-button"  name="element__like-button"></button>
-            </div>
-            <button type="button" class="element__delete-button"></button>
-          </article>
-
-          <article class="element">
-            <img class="element__image" src="./images/Shanghai.png" alt="Эльбрус">
-            <div class="element__box">
-              <h2 class="element__title">Shanghai, China</h2>
-              <button type="button" class="element__like-button"  name="element__like-button"></button>
-            </div>
-            <button type="button" class="element__delete-button"></button>
-          </article>
-
-          <article class="element">
-            <img class="element__image" src="./images/toronto.png" alt="Домбай">
-            <div class="element__box">
-              <h2 class="element__title">Toronto, Canada</h2>
-              <button type="button" class="element__like-button"  name="element__like-button"></button>
-            </div>
-            <button type="button" class="element__delete-button"></button>
-          </article>
-
-          <article class="element">
-            <img class="element__image" src="./images/SaintPt.jpg" alt="Карачаевск">
-            <div class="element__box">
-              <h2 class="element__title">Saint-Petersburg</h2>
-              <button type="button" class="element__like-button"  name="element__like-button"></button>
-            </div>
-            <button type="button" class="element__delete-button"></button>
-          </article>
-
         </section>
 
       </main>
@@ -107,24 +52,24 @@
       <p class="footer__copyrigth">© 2023 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <div class="popup popup_profile">
       <div class="popup__container">
         <h3 class="popup__heading">Редактировать профиль</h3>
-        <form class="popup__forms"> 
+        <form class="popup__forms form-profile"> 
             <fieldset class="popup__input-container">
-              <input type="text" class="popup__form popup__form-Name" value="Жак-Ив Кусто" required>
-              <input type="text" class="popup__form popup__form-Job"  value="Исследователь океана" required>
+              <input type="text" class="popup__form popup__form-Name" required>
+              <input type="text" class="popup__form popup__form-Job"  required>
               <button type="submit"  class="popup__save-button" name="popup__save-button">Cохранить</button>
             </fieldset>        
         </form>
         <button type="button" class="popup__close active"></button>
       </div> 
     </div>
-    openButton popup__button-close
+    
     <div class="popup popup_place">
       <div class="popup__container">
         <h3 class="popup__heading">Новое место</h3>
-        <form class="popup__forms"> 
+        <form class="popup__forms form-place"> 
             <fieldset class="popup__input-container">
               <input type="text" id="inputTitle" class="popup__form" placeholder="Название" required>
               <input type="text" id="inputLink" class="popup__form"  placeholder="Ссылка на картинку" required>
