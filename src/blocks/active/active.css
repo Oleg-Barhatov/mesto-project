@@ -1,0 +1,4 @@
+.active:hover {
+  transition: .2s;
+  opacity: 0.6;
+}

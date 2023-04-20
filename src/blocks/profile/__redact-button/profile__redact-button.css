@@ -1,0 +1,18 @@
+.profile__redact-button {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid #FFFFFF;
+  cursor: pointer;
+  background-color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media  screen and (max-width: 700px){
+  .profile__redact-button {
+    width: 18px;
+    height: 18px;
+  }
+}

@@ -1,0 +1,11 @@
+.element {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #FFFFFF;
+  transition: .2s;
+}
+
+.element:hover {
+  transform: scale(1.009);
+}

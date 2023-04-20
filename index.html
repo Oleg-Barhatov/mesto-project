@@ -55,10 +55,34 @@
     <div class="popup popup_profile">
       <div class="popup__container">
         <h3 class="popup__heading">Редактировать профиль</h3>
-        <form class="popup__forms form-profile"> 
+        <form class="popup__forms form-profile" novalidate> 
             <fieldset class="popup__input-container">
-              <input type="text" class="popup__form popup__form-Name" required>
-              <input type="text" class="popup__form popup__form-Job"  required>
+              <label class="popup__label">
+                <input 
+                  type="text" 
+                  id='input-Name' 
+                  class="popup__form popup__form-Name" 
+                  minlength="2" 
+                  maxlength="40" 
+                  pattern="^[a-zA-Zа-яёА-ЯЁ\s\-]+$"
+                  data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+                  required
+                >
+                <span class="input-Name-error form__error"></span>
+              </label>
+              <label class="popup__label">
+                <input 
+                  type="text" 
+                  id='input-Job' 
+                  class="popup__form popup__form-Job"  
+                  minlength="2" 
+                  maxlength="200" 
+                  pattern="^[a-zA-Zа-яёА-ЯЁ\s\-]+$"
+                  data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+                  required
+                >
+                <span class="input-Job-error form__error"></span>
+              </label>
               <button type="submit"  class="popup__save-button" name="popup__save-button">Cохранить</button>
             </fieldset>        
         </form>
@@ -69,10 +93,32 @@
     <div class="popup popup_place">
       <div class="popup__container">
         <h3 class="popup__heading">Новое место</h3>
-        <form class="popup__forms form-place"> 
+        <form class="popup__forms form-place" novalidate> 
             <fieldset class="popup__input-container">
-              <input type="text" id="inputTitle" class="popup__form" placeholder="Название" required>
-              <input type="text" id="inputLink" class="popup__form"  placeholder="Ссылка на картинку" required>
+              <label class="popup__label">
+                <input 
+                  type="text" 
+                  id="inputTitle" 
+                  class="popup__form popup__form_name" 
+                  minlength="2" 
+                  maxlength="30" 
+                  placeholder="Название" 
+                  pattern="^[a-zA-Zа-яёА-ЯЁ\s\-]+$"
+                  data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+                  required
+                >                
+                <span class="inputTitle-error form__error"></span>
+              </label>
+              <label class="popup__label">
+                <input 
+                  type="url" 
+                  id="inputLink" 
+                  class="popup__form"  
+                  placeholder="Ссылка на картинку" 
+                  required
+                >
+                <span class="inputLink-error form__error"></span>
+              </label>
               <button type="submit" id='buttonCardSave' class="popup__save-button" name="popup__save-button">Cохранить</button>
             </fieldset>        
         </form>
@@ -99,9 +145,12 @@
       <button type="button" class="element__delete-button"></button>
     </article>
   </template>
-
-<script src="./cardsArr.js"></script>
-<script src="./script.js"></script>
+  
+<script type="module" src="./src/components/card.js"></script>
+<script type="module" src="./src/components/index.js"></script>
+<script type="module" src="./src/components/modal.js"></script>
+<script type="module" src="./src/components/utils.js"></script>
+<script type="module" src="./src/components/validate.js"></script>
 </body>
 
 </html>

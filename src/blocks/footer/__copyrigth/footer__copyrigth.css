@@ -1,0 +1,23 @@
+.footer__copyrigth {
+  margin: 0;
+  font-family: 'Inter', Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 21.78px;
+  color: #545454;
+}
+
+@media screen and (max-width: 879px) {
+  .footer__copyrigth {
+    margin: 0 auto;
+    max-width: calc(100% - 38px);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .footer__copyrigth {
+    width: calc(100% - 36px);
+    font-size: .875rem;
+    line-height: 16.94px;
+  }
+}
