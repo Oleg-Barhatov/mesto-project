@@ -10,7 +10,6 @@
     <meta name="description" content="Третий проект по верстке, адаптивный макет">
     <meta name="keywords" content="HTML5, CSS3, FlexBox, Figma">
     <meta name="author" content="Oleg Barhatov">
-    <link rel="stylesheet" href="./pages/index.css">
     <title>Место</title>
 
 </head>
@@ -20,25 +19,25 @@
   <div class="page">
 
     <header class="header">
-      <img class="header__logo" src="./images/Header-logo.svg" alt="Логотип"> 
+      <img class="header__logo" src="<%=require('./images/Header-logo.svg')%>" alt="Логотип"> 
     </header>
 
       <main class="main">
 
         <section class="profile">
 
-          <img class="profile__avatar" src="./images/Profile.png" alt="Фото профиля">
+          <img class="profile__avatar" src="<%=require('./images/Profile.png')%>" alt="Фото профиля">
           <div class="profile__info">
             <div class="profile__box">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
               <button class="profile__redact-button active" type="button" name="profile__redact-button">
-                <img class="profile__image-pencil" src="./images/Profile-pen.svg" alt="Редактировать профиль">
+                <img class="profile__image-pencil" src="<%=require('./images/Profile-pen.svg')%>" alt="Редактировать профиль">
               </button>
             </div>
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
           <button class="profile__add-button active" id='openButton' type="button" name="profile__add-button">
-            <img class="profile__image-button" src="./images/Profile-plus.svg" alt="Кнопка добавить">
+            <img class="profile__image-button" src="<%=require('./images/Profile-plus.svg')%>" alt="Кнопка добавить">
           </button>
 
         </section>
@@ -146,7 +145,6 @@
     </article>
   </template>
   
-
 </body>
 
 </html>

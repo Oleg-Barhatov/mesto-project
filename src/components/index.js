@@ -3,6 +3,7 @@ import {popupProfile, iconsClose, formCardSave, popupForm, buttonRedact, buttonP
 import {closeModal, openModal, resetInput, editProfile} from './modal.js';
 import {initialCards, createCard} from './card.js';
 import {enableValidation} from './validate.js';
+import '../pages/index.css';
 
 iconsClose.forEach(item => {
   item.addEventListener("click", event => {
