@@ -1,0 +1,14 @@
+.popup__save-button_disable {
+  width: 358px;
+  height: 50px;
+  margin-top: 18px;
+  padding: 0;
+  cursor: auto;
+  border-radius: 2px;
+  font-family: inherit;
+  font-size: 18px;
+  line-height: 21.78px;
+  border: 1px solid rgba(0, 0, 0, 0.2);;
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(0, 0, 0, 0.2);
+}
