@@ -1,5 +1,5 @@
+export const popups = document.querySelectorAll('.popup')
 export const popupProfile = document.querySelector(".popup_profile");
-export const iconsClose = document.querySelectorAll(".popup__close");
 export const formCardSave = document.querySelector('.form-place')
 export const popupForm = document.querySelector(".popup_profile");
 export const buttonRedact = document.querySelector(".profile__redact-button");

@@ -1,19 +1,23 @@
-import {popupProfile, iconsClose, formCardSave, popupForm, buttonRedact, buttonPlus,
-  inputName,inputJob, popupAddCard,titleInput,urlInput,cards, obj} from './utils.js';
-import {closeModal, openModal, resetInput, editProfile} from './modal.js';
+import {popupProfile, formCardSave, popupForm, buttonRedact, buttonPlus,
+  inputName,inputJob, popupAddCard,titleInput,urlInput,cards, obj, popups} from './utils.js';
+import {closeModal, openModal, resetInput, editProfile, disabledButton} from './modal.js';
 import {initialCards, createCard} from './card.js';
 import {enableValidation} from './validate.js';
 import '../pages/index.css';
 
-iconsClose.forEach(item => {
-  item.addEventListener("click", event => {
-    const element = event.target.closest('.popup');
-    closeModal(element)
+popups.forEach(item => {
+  item.addEventListener('mousedown', evt => {
+    if(evt.target.classList.contains('popup_opened')){
+      closeModal(item)
+    }
+    if(evt.target.classList.contains('popup__close')){
+      closeModal(item)
+    }
   })
 })
 
 buttonRedact.addEventListener("click", () => openModal(popupProfile, resetInput(inputName, inputJob)) );
-buttonPlus.addEventListener("click", () => {openModal(popupAddCard), formCardSave.reset()});
+buttonPlus.addEventListener("click", () => {openModal(popupAddCard), formCardSave.reset(), disabledButton(formCardSave)});
 
 popupForm.addEventListener("submit", evt => {
   evt.preventDefault();

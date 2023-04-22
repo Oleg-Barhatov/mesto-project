@@ -2,11 +2,11 @@ import {modal, titleName, subtitleJob, picture, figcaption} from './utils.js'
 
 function closeModal(element) {
   element.classList.remove('popup_opened'); 
+  document.removeEventListener('keydown', tapCloseEscape)
 }
 
 function openModal(element) {
   element.classList.add('popup_opened'); 
-  clickCloseOverlay(element);
   document.addEventListener('keydown', tapCloseEscape);
   resetError(element);
 }
@@ -34,27 +34,24 @@ function getAtribute (item) {
   });
 }
 
-function clickCloseOverlay(item) {
-  item.addEventListener('click', evt => {
-    if(evt.target === evt.currentTarget) {
-      closeModal(item)
-    }
-  })
-}
-
 function tapCloseEscape (evt) {
   if(evt.key === 'Escape') {
     const element = document.querySelector(".popup_opened")
     closeModal(element)
   }
-  document.removeEventListener('keydown', tapCloseEscape)
 }
 
 function resetError (element) {
   const iputItem = element.querySelectorAll('.popup__form');
   iputItem.forEach(item => item.classList.remove('popup__form_type_error'))
   const errorItem = element.querySelectorAll('.form__error');
-  errorItem.forEach(item => item.textContent = ' ')
+  errorItem.forEach(item => item.textContent = ' ');
 }
 
-export {closeModal, openModal, resetInput, editProfile, getAtribute}
+function disabledButton (element) {
+  const button = element.querySelector('.popup__save-button');
+  button.classList.add('popup__save-button_disable');
+  button.setAttribute('disabled', true);
+} 
+
+export {closeModal, openModal, resetInput, editProfile, getAtribute, disabledButton}
