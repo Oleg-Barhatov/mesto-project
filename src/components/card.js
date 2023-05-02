@@ -1,6 +1,7 @@
 import { removeCardServer, likeToggle } from './api.js';
 import { getAtribute, openModal, closeModal } from './modal.js';
 import { popupDeleteCard, popupFormDelete } from './utils.js';
+
 function createCard (itemUrl, itemTitle, itemLike, myID, ownerID, itemID) {
   const content = document.querySelector("#templateElement").content;
   const cloneElement = content.cloneNode(true);
@@ -16,7 +17,7 @@ function createCard (itemUrl, itemTitle, itemLike, myID, ownerID, itemID) {
   checkLiked(itemLike, myID, cloneLikeCount, cloneLike)
   liked(cloneLike, itemID, cloneLikeCount);
   removeButtonDelete(cloneButtonDelete, myID, ownerID)
-  deleteCard(cloneButtonDelete, popupFormDelete, itemID)
+  openPopupDeleteCard(cloneButtonDelete, popupFormDelete, itemID)
   return cloneElement;
 }
 
@@ -42,7 +43,8 @@ function liked (cloneLike, itemID, cloneLikeCount) {
   });
 }
 
-function deleteCard(cloneButtonDelete, popupFormDelete, itemID) {
+
+function openPopupDeleteCard(cloneButtonDelete, popupFormDelete, itemID) {
   cloneButtonDelete.addEventListener("click", (evt) => {
     openModal(popupDeleteCard)
     removeServerCard(popupFormDelete, itemID, evt)

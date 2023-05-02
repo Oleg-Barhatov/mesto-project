@@ -7,7 +7,7 @@
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/main/main.css);
 @import url(../blocks/profile/__container/profile__container.css);
-@import url(../blocks/profile_);
+@import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__box/profile__box.css);
@@ -48,75 +48,6 @@
 
 
 
-
-
-/* .element__container {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-} 
-
-.element__like-count {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  font-family: 'Inter', Helvetica, sans-serif;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 16px;
-}
-
-.popup__box-container {
-  width: 430px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  box-sizing: border-box;
-  padding-top: 34px;
-  padding-bottom: 37px;
-  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-  background-color: #FFFFFF;
-} 
-
-@media screen and (max-width: 550px) {
-  .popup__box-container {
-    width: 282px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-  }
-} 
-
-
- .profile__container {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
-}
-
-.profile__container::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url(../../src/images/Profile-redact.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 26px, 26px, cover;
-  background-color: rgba(0, 0, 0, 0.8 );
-  opacity: 0;
-  transition: opacity 0.3s linear;
-}
-
-.profile__container:hover::after {
-  opacity: 1;
-} */
 
 
 
