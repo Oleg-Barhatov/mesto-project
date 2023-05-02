@@ -25,16 +25,17 @@
       <main class="main">
 
         <section class="profile">
-
-          <img class="profile__avatar" src="<%=require('./images/Profile.png')%>" alt="Фото профиля">
+          <div class="profile__container">
+            <img class="profile__avatar" src="" alt="Фото профиля">
+          </div>
           <div class="profile__info">
             <div class="profile__box">
-              <h1 class="profile__title">Жак-Ив Кусто</h1>
+              <h1 class="profile__title"></h1>
               <button class="profile__redact-button active" type="button" name="profile__redact-button">
                 <img class="profile__image-pencil" src="<%=require('./images/Profile-pen.svg')%>" alt="Редактировать профиль">
               </button>
             </div>
-            <p class="profile__subtitle">Исследователь океана</p>
+            <p class="profile__subtitle"></p>
           </div>
           <button class="profile__add-button active" id='openButton' type="button" name="profile__add-button">
             <img class="profile__image-button" src="<%=require('./images/Profile-plus.svg')%>" alt="Кнопка добавить">
@@ -126,6 +127,41 @@
     </div>
   </div> 
 
+  <div class="popup popup_avatar">
+    <div class="popup__container">
+      <h3 class="popup__heading">Обновить аватар</h3>
+      <form class="popup__forms form-avatar" novalidate> 
+          <fieldset class="popup__input-container">
+            <label class="popup__label">
+              <input 
+                type="url" 
+                id="inputLink" 
+                class="popup__form"  
+                placeholder="Ссылка на картинку" 
+                required
+              >
+              <span class="inputLink-error form__error"></span>
+            </label>
+            <button type="submit" id='buttonCardSave' class="popup__save-button" name="popup__save-button">Cохранить</button>
+          </fieldset>        
+      </form>
+      <button type="button" id='popupClosed' class="popup__close active"></button>
+    </div> 
+  </div>
+</div> 
+
+  <div class="popup popup_delete-card">
+    <div class="popup__box-container">
+      <h3 class="popup__heading">Удалить?</h3>
+      <form class="popup__forms form-delete"> 
+          <fieldset class="popup__input-container">
+            <button type="submit" id='buttonCardSave' class="popup__save-button" name="popup__save-button">Да</button>
+          </fieldset>        
+      </form>
+      <button type="button" id='popupClosed' class="popup__close active"></button>
+    </div> 
+  </div>
+
   <div class="popup popup_image">
     <figure class="popup__content">
       <img src="" alt="" class="popup__picture">
@@ -139,7 +175,10 @@
       <img class="element__image">
       <div class="element__box">
         <h2 class="element__title"></h2>
-        <button type="button" class="element__like-button"  name="element__like-button"></button>
+        <div class="element__container">
+          <button type="button" class="element__like-button"  name="element__like-button"></button>
+          <p class="element__like-count"></p>
+        </div>
       </div>
       <button type="button" class="element__delete-button"></button>
     </article>

@@ -1,4 +1,4 @@
-import {modal, titleName, subtitleJob, picture, figcaption} from './utils.js'
+import { modal, titleName, subtitleJob, picture, figcaption, avatar } from './utils.js'
 
 function closeModal(element) {
   element.classList.remove('popup_opened'); 
@@ -14,11 +14,13 @@ function openModal(element) {
 function resetInput(jobInput, nameInput) {
   jobInput.value = titleName.innerText;
   nameInput.value = subtitleJob.innerText;  
+  
 }
 
-function editProfile(name, job) {
+function editProfile(name, job, photo) {
   titleName.textContent = name;
   subtitleJob.textContent = job;
+  avatar.setAttribute('src', photo)
 }
 
 function getAtribute (item) {
@@ -55,3 +57,4 @@ function disabledButton (element) {
 } 
 
 export {closeModal, openModal, resetInput, editProfile, getAtribute, disabledButton}
+
