@@ -6,28 +6,25 @@
   }
 }
 
+const getResponseData = (res) => {
+  if (!res.ok) {
+      return Promise.reject(`Ошибка: ${res.status}`); 
+  }
+  return res.json();
+};
+
 const getInfoProfile = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers
   })
-    .then(res => {
-      if(res.ok) { 
-        return res.json();
-      } 
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    })
- }
+  .then (res => getResponseData(res))
+ };
 
  const getInitialCards =() => {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers
   })
-    .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    })
+  .then (res => getResponseData(res))
  };
 
  const saveInfoProfile = ( nameValue, aboutValue ) => {
@@ -39,6 +36,7 @@ const getInfoProfile = () => {
       about: `${aboutValue}`
     })
   })
+  .then (res => getResponseData(res))
  }
 
  const saveNewCard = ( nameValue, urlValue ) => {
@@ -50,20 +48,23 @@ const getInfoProfile = () => {
       link: `${urlValue}`
     })
   })
+  .then (res => getResponseData(res))
  }
 
 const removeCardServer = (itemID) => {
   return fetch(`${config.baseUrl}/cards/${itemID}`, {
     method: 'DELETE',
     headers: config.headers
-  })  
+  })
+  .then (res => getResponseData(res))  
 }
 
 const likeToggle = (itemID, toggleLike) => {
   return fetch(`${config.baseUrl}/cards/likes/${itemID}`, {
     method: toggleLike,
     headers: config.headers
-  });
+  })
+  .then (res => getResponseData(res)) 
 }
 
 const addNewAvatar = (link) => {
@@ -74,6 +75,7 @@ const addNewAvatar = (link) => {
       avatar: `${link}`
     })
   })  
+  .then (res => getResponseData(res))
 }
 
 export { config, getInfoProfile, getInitialCards, saveInfoProfile, 

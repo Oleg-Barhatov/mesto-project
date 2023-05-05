@@ -14,8 +14,6 @@ export const titleName = document.querySelector(".profile__title");
 export const subtitleJob = document.querySelector(".profile__subtitle");
 export const picture = document.querySelector(".popup__picture");
 export const figcaption = document.querySelector(".popup__figcaption");
-export const popupDeleteCard = document.querySelector(".popup_delete-card");
-export const popupFormDelete = document.querySelector(".form-delete");
 export const buttonSaveInfo = popupProfile.querySelector(".popup__save-button");
 export const buttonSaveCard = popupAddCard.querySelector(".popup__save-button");
 export const popupAvatar = document.querySelector(".popup_avatar");
@@ -24,6 +22,7 @@ export const inputFormAvatar = popupFormAvatar.querySelector(".popup__form");
 export const avatarRedact = document.querySelector(".profile__container");
 export const avatar = document.querySelector(".profile__avatar");
 export const buttonSaveAvatar = popupAvatar.querySelector(".popup__save-button");
+
 
 export const obj = {
   formList: '.popup__forms',

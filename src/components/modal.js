@@ -8,7 +8,6 @@ function closeModal(element) {
 function openModal(element) {
   element.classList.add('popup_opened'); 
   document.addEventListener('keydown', tapCloseEscape);
-  resetError(element);
 }
 
 function resetInput(jobInput, nameInput) {
@@ -56,5 +55,5 @@ function disabledButton (element) {
   button.setAttribute('disabled', true);
 } 
 
-export {closeModal, openModal, resetInput, editProfile, getAtribute, disabledButton}
+export {closeModal, openModal, resetInput, editProfile, getAtribute, disabledButton, resetError}
 
