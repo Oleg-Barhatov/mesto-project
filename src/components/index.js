@@ -5,7 +5,7 @@ import { popupProfile, formCardSave, buttonRedact, buttonPlus,
 import { closeModal, openModal, resetInput, editProfile, disabledButton, resetError } from './modal.js';
 import { createCard } from './card.js';
 import { enableValidation } from './validate.js';
-import { addNewAvatar, getInfoProfile, getInitialCards, saveInfoProfile, saveNewCard } from './api.js';
+import api from './api.js';
 import '../pages/index.css';
 import { Popup } from './popup.js';
 
@@ -26,14 +26,14 @@ a.setEventListeners()
 //   })
 // })
 
-// buttonRedact.addEventListener("click", () => openModal(popupProfile, resetInput(inputName, inputJob), resetError(popupProfile)) );
+buttonRedact.addEventListener("click", () => openModal(popupProfile, resetInput(inputName, inputJob), resetError(popupProfile)) );
 buttonPlus.addEventListener("click", () => {openModal(popupAddCard), formCardSave.reset(), disabledButton(formCardSave), resetError(popupAddCard)});
 avatarRedact.addEventListener('click', () => {openModal(popupAvatar), popupFormAvatar.reset(), disabledButton(popupFormAvatar), resetError(popupAvatar)})
 
 popupProfile.addEventListener("submit", evt => {
   evt.preventDefault();
   renderLoading(true, buttonSaveInfo )
-  saveInfoProfile(inputName.value, inputJob.value)
+  api.setUserInfo(inputName.value, inputJob.value)
     .then(result => {
       titleName.textContent = result.name;
       subtitleJob.textContent = result.about;
@@ -46,7 +46,7 @@ popupProfile.addEventListener("submit", evt => {
 formCardSave.addEventListener("submit", (evt) => {
   evt.preventDefault();
   renderLoading(true, buttonSaveCard )
-  saveNewCard(titleInput.value, urlInput.value)
+  api.addNewCard(titleInput.value, urlInput.value)
     .then(result => {
       cards.prepend(createCard(result.link, result.name, result.likes, null, null, result._id ))
       closeModal(popupAddCard) 
@@ -58,7 +58,7 @@ formCardSave.addEventListener("submit", (evt) => {
 
 enableValidation(obj)
 
-const promiseArray = [getInfoProfile(), getInitialCards()]
+const promiseArray = [api.getUserInfo(), api.getCards()]
 
 Promise.all(promiseArray)
     .then(([resultUser, resultCards])  => {
@@ -70,7 +70,7 @@ Promise.all(promiseArray)
 popupFormAvatar.addEventListener('submit', evt => {
   evt.preventDefault();
   renderLoading(true, buttonSaveAvatar )
-  addNewAvatar(inputFormAvatar.value) 
+  api.updateAvatar(inputFormAvatar.value)
     .then(result => {
       avatar.setAttribute('src', result.avatar)
       closeModal(popupAvatar)
