@@ -7,19 +7,26 @@ import { createCard } from './card.js';
 import { enableValidation } from './validate.js';
 import { addNewAvatar, getInfoProfile, getInitialCards, saveInfoProfile, saveNewCard } from './api.js';
 import '../pages/index.css';
+import { Popup } from './popup.js';
 
-popups.forEach(item => {
-  item.addEventListener('mousedown', evt => {
-    if(evt.target.classList.contains('popup_opened')){
-      closeModal(item)
-    }
-    if(evt.target.classList.contains('popup__close')){
-      closeModal(item)
-    }
-  })
-})
+const a = new Popup(popupProfile)
+buttonRedact.addEventListener('click', () => {a.open()})
+a.setEventListeners()
 
-buttonRedact.addEventListener("click", () => openModal(popupProfile, resetInput(inputName, inputJob), resetError(popupProfile)) );
+
+
+// popups.forEach(item => {
+//   item.addEventListener('mousedown', evt => {
+//     if(evt.target.classList.contains('popup_opened')){
+//       closeModal(item)
+//     }
+//     if(evt.target.classList.contains('popup__close')){
+//       closeModal(item)
+//     }
+//   })
+// })
+
+// buttonRedact.addEventListener("click", () => openModal(popupProfile, resetInput(inputName, inputJob), resetError(popupProfile)) );
 buttonPlus.addEventListener("click", () => {openModal(popupAddCard), formCardSave.reset(), disabledButton(formCardSave), resetError(popupAddCard)});
 avatarRedact.addEventListener('click', () => {openModal(popupAvatar), popupFormAvatar.reset(), disabledButton(popupFormAvatar), resetError(popupAvatar)})
 
