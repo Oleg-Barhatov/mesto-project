@@ -1,83 +1,74 @@
- const config = {
-  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-23',
-  headers: {
-    authorization: '31d73e44-fcb9-4ff0-a8e8-65cffdcd1182',
-    'Content-Type': 'application/json'
-  }
+const config = {
+    baseUrl: 'https://nomoreparties.co/v1/plus-cohort-23',
+    headers: {
+        authorization: '31d73e44-fcb9-4ff0-a8e8-65cffdcd1182',
+        'Content-Type': 'application/json'
+    }
 }
 
-const getResponseData = (res) => {
-  if (!res.ok) {
-      return Promise.reject(`Ошибка: ${res.status}`); 
-  }
-  return res.json();
-};
 
-const getInfoProfile = () => {
-  return fetch(`${config.baseUrl}/users/me`, {
-    headers: config.headers
-  })
-  .then (res => getResponseData(res))
- };
+class Api {
+    constructor({baseUrl, headers}) {
+        this._baseUrl = baseUrl
+        this._headers = headers
+    }
 
- const getInitialCards =() => {
-  return fetch(`${config.baseUrl}/cards`, {
-    headers: config.headers
-  })
-  .then (res => getResponseData(res))
- };
+    async _request(method, route, payload = null) {
+        const headers = this._headers
+        const init = {
+            method,
+            headers,
+            body: payload ? JSON.stringify(payload) : payload
+        }
+        if (method.toLowerCase() === "get") {
+            delete init.body
+        }
 
- const saveInfoProfile = ( nameValue, aboutValue ) => {
-  return fetch(`${config.baseUrl}/users/me`, {
-    method: 'PATCH',
-    headers: config.headers,
-    body: JSON.stringify({
-      name: `${nameValue}`,
-      about: `${aboutValue}`
-    })
-  })
-  .then (res => getResponseData(res))
- }
+        const response = await fetch(this._baseUrl + route, init);
+        if (!response.ok) {
+            return Promise.reject(`Ошибка: ${response.status}`);
+        }
+        return await response.json()
+    }
 
- const saveNewCard = ( nameValue, urlValue ) => {
-  return fetch(`${config.baseUrl}/cards`, {
-    method: 'POST',
-    headers: config.headers,
-    body: JSON.stringify({
-      name: `${nameValue}`,
-      link: `${urlValue}`
-    })
-  })
-  .then (res => getResponseData(res))
- }
+    getUserInfo() {
+        return this._request("GET", "/users/me")
+    }
 
-const removeCardServer = (itemID) => {
-  return fetch(`${config.baseUrl}/cards/${itemID}`, {
-    method: 'DELETE',
-    headers: config.headers
-  })
-  .then (res => getResponseData(res))  
+    getCards() {
+        return this._request("GET", "/cards ")
+    }
+
+    setUserInfo(name, about) {
+        return this._request("PATCH", "/users/me", {name, about})
+    }
+
+    addNewCard(name, link) {
+
+        return this._request("POST", "/cards", {name, link})
+    }
+
+    deleteCard(cardId) {
+        return this._request("DELETE", `/cards/${cardId}`)
+    }
+
+    putCardLike(cardId) {
+        return this._request("PUT", `/cards/likes/${cardId}`)
+    }
+
+    rmvCardLike(cardId) {
+        return this._request("DELETE", `/cards/likes/${cardId}`)
+    }
+
+    updateAvatar(avatar) {
+        return this._request("PATCH", "/users/me/avatar", {avatar})
+    }
+    toggleCardLike(cardId, method){
+        if (method.toLowerCase()==="put"){
+            return this.putCardLike(cardId)
+        }
+        return this.rmvCardLike(cardId)
+    }
 }
-
-const likeToggle = (itemID, toggleLike) => {
-  return fetch(`${config.baseUrl}/cards/likes/${itemID}`, {
-    method: toggleLike,
-    headers: config.headers
-  })
-  .then (res => getResponseData(res)) 
-}
-
-const addNewAvatar = (link) => {
-  return fetch(`${config.baseUrl}/users/me/avatar`, {
-    method: 'PATCH',
-    headers: config.headers,
-    body: JSON.stringify({
-      avatar: `${link}`
-    })
-  })  
-  .then (res => getResponseData(res))
-}
-
-export { config, getInfoProfile, getInitialCards, saveInfoProfile, 
-  saveNewCard, removeCardServer, likeToggle, addNewAvatar
-}
+const api = new Api(config)
+export default api

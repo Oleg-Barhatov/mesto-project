@@ -1,4 +1,4 @@
-import { removeCardServer, likeToggle } from './api.js';
+import api from './api.js';
 import { getAtribute, closeModal } from './modal.js';
 
 function createCard (itemUrl, itemTitle, itemLike, myID, ownerID, itemID) {
@@ -29,8 +29,8 @@ function checkLiked (itemLike, myID, cloneLikeCount, cloneLike) {
 
 function liked (cloneLike, itemID, cloneLikeCount) {
   cloneLike.addEventListener("click", () => {
-    const toggleLike = cloneLike.classList.contains('element__like-button_active') ? 'DELETE' : 'PUT';
-    likeToggle(itemID, toggleLike)
+    const method = cloneLike.classList.contains('element__like-button_active') ? 'DELETE' : 'PUT';
+    api.toggleCardLike(itemID, method)
       .then(result => {
         cloneLikeCount.textContent = result.likes.length;
         cloneLike.classList.toggle("element__like-button_active");
@@ -43,7 +43,7 @@ function liked (cloneLike, itemID, cloneLikeCount) {
 
 function DeleteCardServer(cloneButtonDelete, itemID) {
   cloneButtonDelete.addEventListener("click", (evt) => {
-    removeCardServer(itemID)
+    api.deleteCard(itemID)
       .then(() => {
         evt.target.closest('.element').remove()
         closeModal(popupDeleteCard)
