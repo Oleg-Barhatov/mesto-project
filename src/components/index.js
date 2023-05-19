@@ -7,7 +7,8 @@ import { createCard } from './card.js';
 import { enableValidation } from './validate.js';
 import api from './api.js';
 import '../pages/index.css';
-import { Popup } from './popup.js';
+import  Popup  from './popup.js';
+
 
 const a = new Popup(popupProfile)
 buttonRedact.addEventListener('click', () => {a.open()})
