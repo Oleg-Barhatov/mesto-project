@@ -1,5 +1,5 @@
 import api from './api.js';
-import { getAtribute, closeModal } from './modal.js';
+import { getAtribute} from './modal.js';
 
 function createCard (itemUrl, itemTitle, itemLike, myID, ownerID, itemID) {
   const content = document.querySelector("#templateElement").content;
@@ -46,7 +46,6 @@ function DeleteCardServer(cloneButtonDelete, itemID) {
     api.deleteCard(itemID)
       .then(() => {
         evt.target.closest('.element').remove()
-        closeModal(popupDeleteCard)
       })
       .catch(error => {
         console.log(error); 

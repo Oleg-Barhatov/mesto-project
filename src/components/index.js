@@ -1,61 +1,85 @@
-import { popupProfile, formCardSave, buttonRedact, buttonPlus,
-  inputName,inputJob, popupAddCard,titleInput,urlInput,cards, obj, popups, 
-  avatarRedact, popupAvatar, popupFormAvatar, inputFormAvatar, avatar, titleName,
-  subtitleJob, buttonSaveInfo, buttonSaveAvatar, buttonSaveCard  } from './utils.js';
-import { closeModal, openModal, resetInput, editProfile, disabledButton, resetError } from './modal.js';
+import { popupProfile, buttonRedact, buttonPlus,
+  popupAddCard,cards, obj,
+  avatarRedact, popupAvatar, avatar, titleName,
+  subtitleJob } from './utils.js';
+import { editProfile } from './modal.js';
 import { createCard } from './card.js';
 import { enableValidation } from './validate.js';
 import api from './api.js';
+import PopupWithForm from './popupWithForm.js';
+import popupWithImage from './popupWithImage.js';
 import '../pages/index.css';
-import  Popup  from './popup.js';
 
 
-const a = new Popup(popupProfile)
-buttonRedact.addEventListener('click', () => {a.open()})
-a.setEventListeners()
+//Попап редактирования профиля
+const editFrofile = new PopupWithForm({
+  popupSelector: popupProfile,
+  callbackSubmitForm: ({name, about}) => {
+
+    editFrofile.renderLoading(true)
+
+    api.setUserInfo(name, about)
+      .then((result) => {
+        titleName.textContent = result.name;
+        subtitleJob.textContent = result.about;
+        editFrofile.close()
+      })
+      .catch((error) => { console.log(error) })
+      .finally(() => { editFrofile.renderLoading(false) })
+  }
+})
+
+//Открытие попапа редактирования профиля
+buttonRedact.addEventListener('click', () => editFrofile.open())
+//Добавляем обработчики события на попап и форму редактирования профиля
+editFrofile.setEventListeners()
 
 
+//Попап добавления новой карточки
+const addCard = new PopupWithForm({
+  popupSelector: popupAddCard,
+  callbackSubmitForm: ({name, link}) => {
 
-// popups.forEach(item => {
-//   item.addEventListener('mousedown', evt => {
-//     if(evt.target.classList.contains('popup_opened')){
-//       closeModal(item)
-//     }
-//     if(evt.target.classList.contains('popup__close')){
-//       closeModal(item)
-//     }
-//   })
-// })
+    addCard.renderLoading(true)
 
-buttonRedact.addEventListener("click", () => openModal(popupProfile, resetInput(inputName, inputJob), resetError(popupProfile)) );
-buttonPlus.addEventListener("click", () => {openModal(popupAddCard), formCardSave.reset(), disabledButton(formCardSave), resetError(popupAddCard)});
-avatarRedact.addEventListener('click', () => {openModal(popupAvatar), popupFormAvatar.reset(), disabledButton(popupFormAvatar), resetError(popupAvatar)})
+    api.addNewCard(name, link)
+      .then((result) => {
+        //РАХИМ ДОБАВЬ СЮДА МЕТОД С КЛАССА КАРД
+        cards.prepend(Card.createCard())
+        addCard.close()
+      })
+      .catch((error) => { console.log(error) })
+      .finally(() => { addCard.renderLoading(false) })
+  }
+})
 
-popupProfile.addEventListener("submit", evt => {
-  evt.preventDefault();
-  renderLoading(true, buttonSaveInfo )
-  api.setUserInfo(inputName.value, inputJob.value)
-    .then(result => {
-      titleName.textContent = result.name;
-      subtitleJob.textContent = result.about;
-      closeModal(popupProfile)
-    })
-    .catch((error) => { console.log(error) })
-    .finally(()=> { renderLoading(false, buttonSaveInfo) })
-});
+//Открытие попапа добавления новой карточки
+buttonPlus.addEventListener('click', () => addCard.open())
+//Добавляем обработчики события на попап и форму добавления новой карты
+addCard.setEventListeners()
 
-formCardSave.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  renderLoading(true, buttonSaveCard )
-  api.addNewCard(titleInput.value, urlInput.value)
-    .then(result => {
-      cards.prepend(createCard(result.link, result.name, result.likes, null, null, result._id ))
-      closeModal(popupAddCard) 
-    })
-    .catch((error) => { console.log(error) })
-    .finally(()=> { renderLoading (false, buttonSaveCard) })
-  
-});
+
+//Попап добавления новой аватарки
+const changeAvatar = new PopupWithForm({
+  popupSelector: popupAvatar,
+  callbackSubmitForm: ({avatarLink}) => {
+
+    changeAvatar.renderLoading(true)
+
+    api.updateAvatar(avatarLink)
+      .then((result) => {
+        avatar.setAttribute('src', result.avatar)
+        changeAvatar.close()
+      })
+      .catch((error) => { console.log(error) })
+      .finally(() => { changeAvatar.renderLoading(false) })
+  }
+})
+
+//Открытие попапа обновления аватара
+avatarRedact.addEventListener('click', () =>{changeAvatar.open()})
+//Добавляем обработчики события на попап и форму обновления аватара
+changeAvatar.setEventListeners()
 
 enableValidation(obj)
 
@@ -68,23 +92,4 @@ Promise.all(promiseArray)
     })
     .catch((error) => {console.log(error)});
 
-popupFormAvatar.addEventListener('submit', evt => {
-  evt.preventDefault();
-  renderLoading(true, buttonSaveAvatar )
-  api.updateAvatar(inputFormAvatar.value)
-    .then(result => {
-      avatar.setAttribute('src', result.avatar)
-      closeModal(popupAvatar)
-    })
-    .catch((error) => {console.log(error)})
-    .finally(()=> {renderLoading (false, buttonSaveAvatar)})
-})
 
-export function renderLoading(isLoading, button) {
-  if (isLoading) {
-    button.textContent = 'Сохранение...';
-  }
-  else {
-    button.textContent = 'Сохранить';
-  }
-}

@@ -52,6 +52,9 @@ export default class PopupWithForm extends Popup {
     super.close()
     //Добавяем сброс формы:
     this._popupForm.reset()
+    //Добавляем сброс кнопки:
+    this._formButton.classList.add('popup__save-button_disable');
+    this._formButton.setAttribute('disabled', true);
   }
 }
 

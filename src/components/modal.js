@@ -1,14 +1,5 @@
-import { modal, titleName, subtitleJob, picture, figcaption, avatar } from './utils.js'
+import { titleName, subtitleJob, picture, figcaption, avatar } from './utils.js'
 
-function closeModal(element) {
-  element.classList.remove('popup_opened'); 
-  document.removeEventListener('keydown', tapCloseEscape)
-}
-
-function openModal(element) {
-  element.classList.add('popup_opened'); 
-  document.addEventListener('keydown', tapCloseEscape);
-}
 
 function resetInput(jobInput, nameInput) {
   jobInput.value = titleName.innerText;
@@ -31,15 +22,7 @@ function getAtribute (item) {
     picture.alt = targetEvent.getAttribute('alt'); 
     figcaption.textContent = titleCard.textContent;
 
-    openModal(modal)
   });
-}
-
-function tapCloseEscape (evt) {
-  if(evt.key === 'Escape') {
-    const element = document.querySelector(".popup_opened")
-    closeModal(element)
-  }
 }
 
 function resetError (element) {
@@ -49,11 +32,6 @@ function resetError (element) {
   errorItem.forEach(item => item.textContent = ' ');
 }
 
-function disabledButton (element) {
-  const button = element.querySelector('.popup__save-button');
-  button.classList.add('popup__save-button_disable');
-  button.setAttribute('disabled', true);
-} 
 
-export {closeModal, openModal, resetInput, editProfile, getAtribute, disabledButton, resetError}
+export {resetInput, editProfile, getAtribute, resetError}
 
