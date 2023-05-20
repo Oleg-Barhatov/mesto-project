@@ -8,6 +8,7 @@ import { enableValidation } from './validate.js';
 import api from './api.js';
 import PopupWithForm from './popupWithForm.js';
 import popupWithImage from './popupWithImage.js';
+import UserInfo from './userInfo.js';
 import '../pages/index.css';
 
 
@@ -30,7 +31,7 @@ const editFrofile = new PopupWithForm({
 })
 
 //Открытие попапа редактирования профиля
-buttonRedact.addEventListener('click', () => editFrofile.open())
+buttonRedact.addEventListener('click', () => {editFrofile.open(), user.getUserInfo()})
 //Добавляем обработчики события на попап и форму редактирования профиля
 editFrofile.setEventListeners()
 
@@ -83,13 +84,22 @@ changeAvatar.setEventListeners()
 
 enableValidation(obj)
 
+//Создаем копию класса UserInfo и передаем селекторы:
+const user = new UserInfo({
+  selectorName: titleName, 
+  selectorAbout: subtitleJob,
+  selectorAvatar: avatar
+})
+
 const promiseArray = [api.getUserInfo(), api.getCards()]
 
 Promise.all(promiseArray)
     .then(([resultUser, resultCards])  => {
-      editProfile(resultUser.name, resultUser.about, resultUser.avatar);
+      //Вызываем метод класса UserInfo и передаем в него данные о пользователе с сервера:
+      user.setUserInfo(resultUser);
       resultCards.forEach(item => {cards.append(createCard(item.link, item.name, item.likes, resultUser._id, item.owner._id, item._id ))})
     })
     .catch((error) => {console.log(error)});
 
-
+const a = titleName.textContent
+console.log(user.getUserInfo())
