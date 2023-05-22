@@ -44,10 +44,10 @@ export default class Card{
     }
     set setLiked(state){
         if (state) {
-            this._likeBtn.classList.add("element__like-button_active")
+            this._likeBtn.classList.add(this._selectors.likeBtnActive)
 
         } else {
-            this._likeBtn.classList.remove("element__like-button_active")
+            this._likeBtn.classList.remove(this._selectors.likeBtnActive)
         }
         this._isLiked = state
     }
@@ -56,8 +56,8 @@ export default class Card{
         return likes? parseInt(likes) : 0
     }
     set likes(value){
-
-         value? this._likeSpan.innerText = value : ""
+        value = value? value: ""
+        this._likeSpan.innerText = value
     }
     set disableTrash(state){
         if (state){
