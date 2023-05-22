@@ -12,7 +12,7 @@ export default class Card{
         this._title = this._node.querySelector(cardSelectors.title)
         this._image = this._node.querySelector(cardSelectors.image)
         this._likeBtn = this._node.querySelector(cardSelectors.likeBtn)
-        this._isLiked = this._likeBtn.classList.contains("element__like-button_active")
+        this._isLiked = this._likeBtn.classList.contains(cardSelectors.likeBtnActive)
         this._likeSpan = this._node.querySelector(cardSelectors.likeCounter)
         this._delBtn = this._node.querySelector(cardSelectors.delBtn)
     }
@@ -108,7 +108,7 @@ export default class Card{
         })
     }
     _setImageListener(onImageClick){
-        onImageClick(this.title, this.imageUrl)
+        this._image.addEventListener("click", ()=>onImageClick(this.title, this.imageUrl))
     }
 
 }
