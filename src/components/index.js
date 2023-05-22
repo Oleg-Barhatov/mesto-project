@@ -101,5 +101,3 @@ Promise.all(promiseArray)
     })
     .catch((error) => {console.log(error)});
 
-const a = titleName.textContent
-console.log(user.getUserInfo())
