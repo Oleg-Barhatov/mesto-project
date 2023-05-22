@@ -1,7 +1,8 @@
 import { popupProfile, buttonRedact, buttonPlus,
   popupAddCard,cards, obj,
   avatarRedact, popupAvatar, avatar, titleName,
-  subtitleJob } from './utils.js';
+  subtitleJob, popupFormSelectors, userInfoSelector, 
+  popupImageSelectors, popupImage, cardSelectors, jobInput, nameInput } from './utils.js';
 import { editProfile } from './modal.js';
 import Card from './card.js';
 import { enableValidation } from './validate.js';
@@ -32,7 +33,12 @@ const editFrofile = new PopupWithForm({
 })
 
 //Открытие попапа редактирования профиля
-buttonRedact.addEventListener('click', () => {editFrofile.open(), user.getUserInfo()})
+buttonRedact.addEventListener('click', () => {
+  editFrofile.open(); 
+  const userInfo = user.getUserInfo();
+  nameInput.value = userInfo.userName;
+  jobInput.value = userInfo.userAbout;
+})
 
 //Попап добавления новой карточки
 const addCard = new PopupWithForm({
@@ -80,9 +86,9 @@ avatarRedact.addEventListener('click', () =>{changeAvatar.open()})
 enableValidation(obj)
 
 //Создаем копию класса UserInfo и передаем селекторы:
-const user = new UserInfo(userInfoSelector)
+const user = new UserInfo( userInfoSelector)
 
-const imagePopup = new popupWithImage(document.querySelector(popupSelectors.popupImage))
+const imagePopup = new popupWithImage(popupImage, popupImageSelectors)
 
 const promiseArray = [api.getUserInfo(), api.getCards()]
 

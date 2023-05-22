@@ -31,6 +31,8 @@ export const subtitleJob = document.querySelector(".profile__subtitle");
 export const picture = document.querySelector(".popup__picture");
 export const figcaption = document.querySelector(".popup__figcaption");
 export const avatar = document.querySelector(".profile__avatar");
+export const jobInput = document.querySelector('.popup__form-Job');
+export const nameInput = document.querySelector('#input-Name');
 
 //Селекторы для валидации
 export const obj = {
