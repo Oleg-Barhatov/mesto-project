@@ -1,12 +1,12 @@
 import Popup from "./popup";
 
 export default class popupWithImage extends Popup {
-  constructor(popupSelector){
+  constructor(popupSelector, popupImageSelectors){
     super(popupSelector);
     
     //Забираем изображение и подпись
-    this._popupImage = this._popupSelector.querySelector(".popup__picture");
-    this._popupFigcaption = this._popupSelector.querySelector(".popup__figcaption");
+    this._popupImage = this._popupSelector.querySelector(popupImageSelectors.picture);
+    this._popupFigcaption = this._popupSelector.querySelector(popupImageSelectors.caption);
 
   }
 
