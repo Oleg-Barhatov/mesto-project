@@ -1,9 +1,11 @@
-import { popupProfile, buttonRedact, buttonPlus,
-  popupAddCard,cards, obj,
-  avatarRedact, popupAvatar, avatar, titleName,
-  subtitleJob } from './utils.js';
+import {
+    popupProfile, buttonRedact, buttonPlus,
+    popupAddCard, cards, obj,
+    avatarRedact, popupAvatar, avatar, titleName,
+    subtitleJob, cardSelectors, popupSelectors
+} from './utils.js';
 import { editProfile } from './modal.js';
-import { createCard } from './card.js';
+import Card from './card.js';
 import { enableValidation } from './validate.js';
 import api from './api.js';
 import PopupWithForm from './popupWithForm.js';
@@ -91,13 +93,21 @@ const user = new UserInfo({
   selectorAvatar: avatar
 })
 
+const imagePopup = new popupWithImage(document.querySelector(popupSelectors.popupImage))
+
 const promiseArray = [api.getUserInfo(), api.getCards()]
 
 Promise.all(promiseArray)
     .then(([resultUser, resultCards])  => {
       //Вызываем метод класса UserInfo и передаем в него данные о пользователе с сервера:
       user.setUserInfo(resultUser);
-      resultCards.forEach(item => {cards.append(createCard(item.link, item.name, item.likes, resultUser._id, item.owner._id, item._id ))})
+      resultCards.forEach(item => {
+          const card = Card.createCard(cardSelectors, item,
+              api.putCardLike.bind(api),
+              api.rmvCardLike.bind(api),
+              api.deleteCard.bind(api),
+              imagePopup.open.bind(imagePopup))
+          cards.append(card.node)})
     })
     .catch((error) => {console.log(error)});
 
