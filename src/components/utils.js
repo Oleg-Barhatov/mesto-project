@@ -35,20 +35,32 @@ export const jobInput = document.querySelector('.popup__form-Job');
 export const nameInput = document.querySelector('#input-Name');
 
 //Селекторы для валидации
-export const obj = {
-    formList: '.popup__forms',
-    inputList: '.popup__form',
-    buttonElement: '.popup__save-button',
-    inactiveButtonElement: 'popup__save-button_disable',
-    inputItemError: 'popup__form_type_error',
-    inputTextError: 'popup__form-error'
+export const formSelectors = {
+    form: '.popup__forms',
+    input: '.popup__form',
+    submitButton: '.popup__save-button',
+    disabledButton: 'popup__save-button_disable',
+    inputError: 'popup__form_type_error',
+    errorSpan: 'popup__form-error'
 }
+
+export const cssClasses = {
+    form: 'form',
+    input: 'form__input',
+    invalidInput: "form__input_invalid",
+    submitButton: 'form__submit-btn',
+    disabledButton: 'form__submit-btn_disabled',
+    inputError: 'form__input_invalid',
+    errorSpan: 'form__error'
+}
+
 export const cardSelectors = {
     template: "#templateElement",
     element:".element",
     image: ".element__image",
     title: ".element__title",
     likeBtn: ".element__like-button",
+    likeBtnActive: "element__like-button_active",
     likeCounter: ".element__like-count",
     delBtn: ".element__delete-button",
 }
