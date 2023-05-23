@@ -103,7 +103,7 @@ export default class Card{
     _setDelListener(onDelete){
         this._delBtn.addEventListener("click", ()=>{
             onDelete(this.cardId)
-                .then(this._node.remove)
+                .then(this._node.remove())
                 .catch(reason => console.error(reason))
         })
     }
