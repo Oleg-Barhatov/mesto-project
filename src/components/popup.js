@@ -4,7 +4,7 @@ export default class Popup {
     this.setEventListeners()
   }
 
-  open = () => {
+  open  ()  {
     this._popupSelector.classList.add('popup_opened');
     document.addEventListener('keydown', this._handleEscClose.bind(this))
   }

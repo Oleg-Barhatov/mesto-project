@@ -1,6 +1,4 @@
 import { popupSelectors, formSelectors, elements,
-
-
   cards, obj,
   userInfoSelector, 
   popupImageSelectors, cardSelectors } from './utils.js';
@@ -51,7 +49,7 @@ const addCard = new PopupWithForm({
     api.addNewCard(name, link)
       .then((result) => {
         //РАХИМ ДОБАВЬ СЮДА МЕТОД С КЛАССА КАРД
-        cards.prepend(Card.createCard())
+        elements.cardsSelector.prepend(Card.createCard())
         addCard.close()
       })
       .catch((error) => { console.log(error) })
@@ -102,7 +100,7 @@ Promise.all(promiseArray)
               api.rmvCardLike.bind(api),
               api.deleteCard.bind(api),
               imagePopup.open) //Не понял как он работает у тебя, стрелочную функцию я поставил
-          cards.append(card.node)})
+              elements.cardsSelector.append(card.node)})
     })
     .catch((error) => {console.log(error)});
 
