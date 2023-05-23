@@ -7,9 +7,9 @@ export default class PopupWithForm extends Popup {
     //Получаем форму попапа:
     this._popupForm = this._popupSelector.querySelector(popupFormSelectors.form)
     //Получаем ВСЕ инпуты формы:
-    this._formInputs = this._popupForm.querySelectorAll(popupFormSelectors.formInputs)
+    this._formInputs = this._popupForm.querySelectorAll(popupFormSelectors.input)
     //Получаем кнопку формы
-    this._formButton = this._popupForm.querySelector(popupFormSelectors.formButton)
+    this._formButton = this._popupForm.querySelector(popupFormSelectors.submitButton)
 
     super.setEventListeners();
     //Добавляем слушатель события формы submit

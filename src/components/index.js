@@ -1,9 +1,9 @@
-import { popupProfile, buttonRedact, buttonPlus,
-  popupAddCard,cards, obj,
-  avatarRedact, popupAvatar, avatar, titleName,
-  subtitleJob, popupFormSelectors, userInfoSelector, 
-  popupImageSelectors, popupImage, cardSelectors, jobInput, nameInput } from './utils.js';
-import { editProfile } from './modal.js';
+import { popupSelectors, formSelectors, elements,
+
+
+  cards, obj,
+  userInfoSelector, 
+  popupImageSelectors, cardSelectors } from './utils.js';
 import Card from './card.js';
 import { enableValidation } from './validate.js';
 import api from './api.js';
@@ -15,16 +15,16 @@ import '../pages/index.css';
 
 //Попап редактирования профиля
 const editFrofile = new PopupWithForm({
-  popupFormSelectors: popupFormSelectors,
-  popupSelector: popupProfile,
+  popupFormSelectors: formSelectors,
+  popupSelector: popupSelectors.popupProfile,
   callbackSubmitForm: ({name, about}) => {
 
     editFrofile.renderLoading(true)
 
     api.setUserInfo(name, about)
       .then((result) => {
-        titleName.textContent = result.name;
-        subtitleJob.textContent = result.about;
+        document.querySelector(userInfoSelector.name).textContent = result.name;
+        document.querySelector(userInfoSelector.about).textContent = result.about;
         editFrofile.close()
       })
       .catch((error) => { console.log(error) })
@@ -33,17 +33,17 @@ const editFrofile = new PopupWithForm({
 })
 
 //Открытие попапа редактирования профиля
-buttonRedact.addEventListener('click', () => {
+elements.buttonRedact.addEventListener('click', () => {
   editFrofile.open(); 
   const userInfo = user.getUserInfo();
-  nameInput.value = userInfo.userName;
-  jobInput.value = userInfo.userAbout;
+  elements.nameInput.value = userInfo.userName;
+  elements.aboutInput.value = userInfo.userAbout;
 })
 
 //Попап добавления новой карточки
 const addCard = new PopupWithForm({
-  popupFormSelectors: popupFormSelectors,
-  popupSelector: popupAddCard,
+  popupFormSelectors: formSelectors,
+  popupSelector: popupSelectors.popupAddCard,
   callbackSubmitForm: ({name, link}) => {
 
     addCard.renderLoading(true)
@@ -60,19 +60,19 @@ const addCard = new PopupWithForm({
 })
 
 //Открытие попапа добавления новой карточки
-buttonPlus.addEventListener('click', () => addCard.open())
+elements.buttonPlus.addEventListener('click', () => addCard.open())
 
 //Попап добавления новой аватарки
 const changeAvatar = new PopupWithForm( {
-  popupFormSelectors: popupFormSelectors,
-  popupSelector: popupAvatar,
+  popupFormSelectors: formSelectors,
+  popupSelector: popupSelectors.popupAvatar,
   callbackSubmitForm: ({avatarLink}) => {
 
     changeAvatar.renderLoading(true)
 
     api.updateAvatar(avatarLink)
       .then((result) => {
-        avatar.setAttribute('src', result.avatar)
+        document.querySelector(userInfoSelector.avatar).setAttribute('src', result.avatar)
         changeAvatar.close()
       })
       .catch((error) => { console.log(error) })
@@ -81,14 +81,14 @@ const changeAvatar = new PopupWithForm( {
 })
 
 //Открытие попапа обновления аватара
-avatarRedact.addEventListener('click', () =>{changeAvatar.open()})
+elements.avatarRedact.addEventListener('click', () =>{changeAvatar.open()})
 
-enableValidation(obj)
+// enableValidation(obj)
 
 //Создаем копию класса UserInfo и передаем селекторы:
 const user = new UserInfo( userInfoSelector)
 
-const imagePopup = new popupWithImage(popupImage, popupImageSelectors)
+const imagePopup = new popupWithImage(popupSelectors.popupImage, popupImageSelectors)
 
 const promiseArray = [api.getUserInfo(), api.getCards()]
 
@@ -101,7 +101,7 @@ Promise.all(promiseArray)
               api.putCardLike.bind(api),
               api.rmvCardLike.bind(api),
               api.deleteCard.bind(api),
-              imagePopup.open.bind(imagePopup))
+              imagePopup.open) //Не понял как он работает у тебя, стрелочную функцию я поставил
           cards.append(card.node)})
     })
     .catch((error) => {console.log(error)});

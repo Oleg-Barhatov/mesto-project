@@ -1,6 +1,3 @@
-
-
-
 //Селекторы для класса UserInfo:
 export const userInfoSelector = {
   name: ".profile__title",
