@@ -1,9 +1,8 @@
-import {
-    popupProfile, buttonRedact, buttonPlus,
-    popupAddCard, cards, obj,
-    avatarRedact, popupAvatar, avatar, titleName,
-    subtitleJob, cardSelectors, popupSelectors
-} from './utils.js';
+import { popupProfile, buttonRedact, buttonPlus,
+  popupAddCard,cards, obj,
+  avatarRedact, popupAvatar, avatar, titleName,
+  subtitleJob, popupFormSelectors, userInfoSelector, 
+  popupImageSelectors, popupImage, cardSelectors, jobInput, nameInput } from './utils.js';
 import { editProfile } from './modal.js';
 import Card from './card.js';
 import { enableValidation } from './validate.js';
@@ -16,6 +15,7 @@ import '../pages/index.css';
 
 //Попап редактирования профиля
 const editFrofile = new PopupWithForm({
+  popupFormSelectors: popupFormSelectors,
   popupSelector: popupProfile,
   callbackSubmitForm: ({name, about}) => {
 
@@ -33,13 +33,16 @@ const editFrofile = new PopupWithForm({
 })
 
 //Открытие попапа редактирования профиля
-buttonRedact.addEventListener('click', () => {editFrofile.open(), user.getUserInfo()})
-//Добавляем обработчики события на попап и форму редактирования профиля
-editFrofile.setEventListeners()
-
+buttonRedact.addEventListener('click', () => {
+  editFrofile.open(); 
+  const userInfo = user.getUserInfo();
+  nameInput.value = userInfo.userName;
+  jobInput.value = userInfo.userAbout;
+})
 
 //Попап добавления новой карточки
 const addCard = new PopupWithForm({
+  popupFormSelectors: popupFormSelectors,
   popupSelector: popupAddCard,
   callbackSubmitForm: ({name, link}) => {
 
@@ -58,12 +61,10 @@ const addCard = new PopupWithForm({
 
 //Открытие попапа добавления новой карточки
 buttonPlus.addEventListener('click', () => addCard.open())
-//Добавляем обработчики события на попап и форму добавления новой карты
-addCard.setEventListeners()
-
 
 //Попап добавления новой аватарки
-const changeAvatar = new PopupWithForm({
+const changeAvatar = new PopupWithForm( {
+  popupFormSelectors: popupFormSelectors,
   popupSelector: popupAvatar,
   callbackSubmitForm: ({avatarLink}) => {
 
@@ -81,19 +82,13 @@ const changeAvatar = new PopupWithForm({
 
 //Открытие попапа обновления аватара
 avatarRedact.addEventListener('click', () =>{changeAvatar.open()})
-//Добавляем обработчики события на попап и форму обновления аватара
-changeAvatar.setEventListeners()
 
 enableValidation(obj)
 
 //Создаем копию класса UserInfo и передаем селекторы:
-const user = new UserInfo({
-  selectorName: titleName, 
-  selectorAbout: subtitleJob,
-  selectorAvatar: avatar
-})
+const user = new UserInfo( userInfoSelector)
 
-const imagePopup = new popupWithImage(document.querySelector(popupSelectors.popupImage))
+const imagePopup = new popupWithImage(popupImage, popupImageSelectors)
 
 const promiseArray = [api.getUserInfo(), api.getCards()]
 
