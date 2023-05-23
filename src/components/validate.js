@@ -17,7 +17,7 @@ export default class FormValidator{
   }
   resetErrors = (form) => {
     this._allErrorSpans.map(span => span.innerText = "")
-    this._allInputs.map(input => input.classList.remove(this._selectors.invalidInput))
+    this._allInputs.map(input => input.classList.remove(this._selectors.inputError))
 
   }
   _renderValidation(input) {
@@ -32,9 +32,9 @@ export default class FormValidator{
     const errorSpan = this._formNode.querySelector(`.${input.id+this._selectors.errorSpanSuffix}`)
     errorSpan.innerText = msg
     if (msg) {
-      input.classList.add(this._selectors.invalidInput)
+      input.classList.add(this._selectors.inputError)
     } else {
-      input.classList.remove(this._selectors.invalidInput)
+      input.classList.remove(this._selectors.inputError)
     }
   }
 
