@@ -48,15 +48,15 @@ class Api {
         return this._request("POST", "/cards", {name, link})
     }
 
-    deleteCard(cardId) {
+    deleteCard = (cardId) => {
         return this._request("DELETE", `/cards/${cardId}`)
     }
 
-    putCardLike(cardId) {
+    putCardLike = (cardId) => {
         return this._request("PUT", `/cards/likes/${cardId}`)
     }
 
-    rmvCardLike(cardId) {
+    rmvCardLike = (cardId) => {
         return this._request("DELETE", `/cards/likes/${cardId}`)
     }
 
