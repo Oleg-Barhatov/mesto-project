@@ -11,7 +11,7 @@ export default class popupWithImage extends Popup {
   }
 
   //Перезаписываем родитель метод open и передаем в него name и link
-  open  (name, link)  {
+  open = (name, link)  =>{
     this._popupImage.alt = name;
     this._popupFigcaption.textContent = name;
     this._popupImage.src = link;
