@@ -22,5 +22,13 @@
 
 _[Mesto](https://oleg-barhatov.github.io/mesto-project/ "Я тут!")_
 
+АВТОРЫ ПРОЕКТА: 
+
+Довидов Рахим  
+triple62la@yandex.ru 
+https://github.com/triple62la
+=================================================================
+
+
 
 
