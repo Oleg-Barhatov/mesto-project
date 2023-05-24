@@ -43,6 +43,7 @@ export default class FormValidator{
     } else {
       this._btn.classList.remove(this._selectors.disabledButton)
     }
+    this._btn.disabled = state
   }
 
   enableValidation() {

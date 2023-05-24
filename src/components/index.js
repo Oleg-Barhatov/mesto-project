@@ -59,13 +59,16 @@ const addCard = new PopupWithForm({
 
     api.addNewCard(name, link)
       .then((result) => {
-        elements.cardsSelector.prepend(Card.createCard(cardSelectors, result,
-            api.putCardLike,
-            api.rmvCardLike,
-            api.deleteCard,
-            imagePopup.open,
-            {trash: true, liked: false}).node)
-        addCard.close()
+        const section = new Section({items:[], renderer: (item) =>{
+            return Card.createCard(cardSelectors, item,
+                api.putCardLike,
+                api.rmvCardLike,
+                api.deleteCard,
+                imagePopup.open,
+                {trash: true, liked: false}).node
+            }}, elements.cardsSelector)
+          section.addItem(result)
+          addCard.close()
       })
       .catch((error) => { console.log(error) })
       .finally(() => { addCard.renderLoading(false) })
@@ -130,7 +133,7 @@ Promise.all(promiseArray)
                     {trash,liked}).node
             }
         }, elements.cardsSelector)
-        section.renderItems()
+        section.renderItems(true)
     })
     .catch((error) => {console.log(error)});
 
