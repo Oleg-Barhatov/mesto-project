@@ -1,15 +1,24 @@
 import { popupSelectors, formSelectors, elements,
-  cards, obj,
-  userInfoSelector, 
+  userInfoSelector,
   popupImageSelectors, cardSelectors } from './utils.js';
 import Card from './card.js';
-import { enableValidation } from './validate.js';
 import api from './api.js';
 import PopupWithForm from './popupWithForm.js';
 import popupWithImage from './popupWithImage.js';
 import UserInfo from './userInfo.js';
 import '../pages/index.css';
+import Section from "./section";
+import FormValidator from "./validate";
 
+
+function likedByMe(cardObj,userId){
+    for (const like of cardObj.likes){
+        if (like["_id"] === userId){
+            return true
+        }
+    }
+    return false
+}
 
 //Попап редактирования профиля
 const editFrofile = new PopupWithForm({
@@ -29,6 +38,8 @@ const editFrofile = new PopupWithForm({
       .finally(() => { editFrofile.renderLoading(false) })
   }
 })
+const editProfileValidation = new FormValidator(formSelectors, document.querySelector(popupSelectors.popupProfile))
+editProfileValidation.enableValidation()
 
 //Открытие попапа редактирования профиля
 elements.buttonRedact.addEventListener('click', () => {
@@ -48,14 +59,22 @@ const addCard = new PopupWithForm({
 
     api.addNewCard(name, link)
       .then((result) => {
-        //РАХИМ ДОБАВЬ СЮДА МЕТОД С КЛАССА КАРД
-        elements.cardsSelector.prepend(Card.createCard())
+        elements.cardsSelector.prepend(Card.createCard(cardSelectors, result,
+            api.putCardLike,
+            api.rmvCardLike,
+            api.deleteCard,
+            imagePopup.open,
+            {trash: true, liked: false}).node)
         addCard.close()
       })
       .catch((error) => { console.log(error) })
       .finally(() => { addCard.renderLoading(false) })
   }
 })
+
+const addPopupValidation = new FormValidator(formSelectors,
+    document.querySelector(popupSelectors.popupAddCard))
+addPopupValidation.enableValidation()
 
 //Открытие попапа добавления новой карточки
 elements.buttonPlus.addEventListener('click', () => addCard.open())
@@ -78,10 +97,13 @@ const changeAvatar = new PopupWithForm( {
   }
 })
 
+const changeAvatarValidation = new FormValidator(formSelectors, document.querySelector(popupSelectors.popupAvatar))
+changeAvatarValidation.enableValidation()
+
 //Открытие попапа обновления аватара
 elements.avatarRedact.addEventListener('click', () =>{changeAvatar.open()})
 
-// enableValidation(obj)
+
 
 //Создаем копию класса UserInfo и передаем селекторы:
 const user = new UserInfo( userInfoSelector)
@@ -90,17 +112,25 @@ const imagePopup = new popupWithImage(popupSelectors.popupImage, popupImageSelec
 
 const promiseArray = [api.getUserInfo(), api.getCards()]
 
+
 Promise.all(promiseArray)
-    .then(([resultUser, resultCards])  => {
-      //Вызываем метод класса UserInfo и передаем в него данные о пользователе с сервера:
-      user.setUserInfo(resultUser);
-      resultCards.forEach(item => {
-          const card = Card.createCard(cardSelectors, item,
-              api.putCardLike.bind(api),
-              api.rmvCardLike.bind(api),
-              api.deleteCard.bind(api),
-              imagePopup.open) //Не понял как он работает у тебя, стрелочную функцию я поставил
-              elements.cardsSelector.append(card.node)})
+    .then(([resultUser, items])  => {
+        //Вызываем метод класса UserInfo и передаем в него данные о пользователе с сервера:
+        user.setUserInfo(resultUser);
+        const section = new Section({
+            items,
+            renderer: (item) => {
+                const trash = item.owner["_id"] === resultUser["_id"]
+                const liked = likedByMe(item, resultUser["_id"])
+                return Card.createCard(cardSelectors, item,
+                    api.putCardLike,
+                    api.rmvCardLike,
+                    api.deleteCard,
+                    imagePopup.open,
+                    {trash,liked}).node
+            }
+        }, elements.cardsSelector)
+        section.renderItems()
     })
     .catch((error) => {console.log(error)});
 

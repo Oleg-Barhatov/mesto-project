@@ -28,7 +28,6 @@ export default class FormValidator{
   }
 
   _setInputError(input, msg) {
-    console.log(input.id+this._selectors.errorSpanSuffix)
     const errorSpan = this._formNode.querySelector(`.${input.id+this._selectors.errorSpanSuffix}`)
     errorSpan.innerText = msg
     if (msg) {

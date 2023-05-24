@@ -16,7 +16,7 @@ export const elements = {
     buttonRedact : document.querySelector(".profile__redact-button"),
     buttonPlus : document.querySelector(".profile__add-button"),
     avatarRedact : document.querySelector(".profile__container"),
-    cardsSelector: document.querySelector(".elements"),
+    cardsSelector: ".elements",
 }
 
 //Селекторы для валидации
