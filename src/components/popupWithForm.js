@@ -8,6 +8,8 @@ export default class PopupWithForm extends Popup {
     this._popupForm = this._popupSelector.querySelector(popupFormSelectors.form)
     //Получаем ВСЕ инпуты формы:
     this._formInputs = this._popupForm.querySelectorAll(popupFormSelectors.input)
+    //Получаем ВСЕ спаны формы:
+    this._formSpan = this._popupForm.querySelectorAll(popupFormSelectors.span)
     //Получаем кнопку формы
     this._formButton = this._popupForm.querySelector(popupFormSelectors.submitButton)
 
@@ -55,10 +57,12 @@ export default class PopupWithForm extends Popup {
     //Добавляем сброс кнопки:
     this._formButton.classList.add('popup__save-button_disable');
     this._formButton.setAttribute('disabled', true);
-
-    
+    //Добавляем сброс ошибки инпута:
+    // const iputItem = element.querySelectorAll('.popup__form');
+    this._formInputs.forEach(item => item.classList.remove('popup__form_type_error'))
+    // const errorItem = element.querySelectorAll('.form__error');
+    this._formSpan.forEach(item => item.textContent = ' ');
+    console.log(this._formSpan)
   }
-
-
 }
 
