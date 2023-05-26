@@ -1,14 +1,14 @@
 import { popupSelectors, formSelectors, elements,
   userInfoSelector,
-  popupImageSelectors, cardSelectors } from './utils.js';
-import Card from './card.js';
-import api from './api.js';
-import PopupWithForm from './popupWithForm.js';
-import popupWithImage from './popupWithImage.js';
-import UserInfo from './userInfo.js';
-import '../pages/index.css';
-import Section from "./section";
-import FormValidator from "./validate";
+  popupImageSelectors, cardSelectors } from '../components/utils/utils.js';
+import Card from '../components/Card.js';
+import api from '../components/Api.js';
+import PopupWithForm from '../components/popupWithForm.js';
+import popupWithImage from '../components/popupWithImage.js';
+import UserInfo from '../components/userInfo.js';
+import './index.css';
+import Section from "../components/Section";
+import FormValidator from "../components/FormValidator";
 
 
 function likedByMe(cardObj,userId){
@@ -60,12 +60,9 @@ const addCard = new PopupWithForm({
     api.addNewCard(name, link)
       .then((result) => {
         const section = new Section({items:[], renderer: (item) =>{
-            return Card.createCard(cardSelectors, item,
-                api.putCardLike,
-                api.rmvCardLike,
-                api.deleteCard,
-                imagePopup.open,
-                {trash: true, liked: false}).node
+            const card = new Card(item, cardSelectors, cardCallbacks)
+            return card.createCard(
+                {trash: true, liked: false})
             }}, elements.cardsSelector)
           section.addItem(result)
           addCard.close()
@@ -115,6 +112,9 @@ const imagePopup = new popupWithImage(popupSelectors.popupImage, popupImageSelec
 
 const promiseArray = [api.getUserInfo(), api.getCards()]
 
+const cardCallbacks = {onRmvLike: api.rmvCardLike, onSetLike: api.putCardLike,
+    onDelete:api.deleteCard, onImageClick: imagePopup.open
+}
 
 Promise.all(promiseArray)
     .then(([resultUser, items])  => {
@@ -125,12 +125,8 @@ Promise.all(promiseArray)
             renderer: (item) => {
                 const trash = item.owner["_id"] === resultUser["_id"]
                 const liked = likedByMe(item, resultUser["_id"])
-                return Card.createCard(cardSelectors, item,
-                    api.putCardLike,
-                    api.rmvCardLike,
-                    api.deleteCard,
-                    imagePopup.open,
-                    {trash,liked}).node
+                const card = new Card(item, cardSelectors, cardCallbacks)
+                return card.createCard({trash,liked})
             }
         }, elements.cardsSelector)
         section.renderItems(true)

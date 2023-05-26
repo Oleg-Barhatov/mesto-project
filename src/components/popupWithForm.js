@@ -1,4 +1,4 @@
-import Popup from "./popup.js";
+import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
   constructor( {popupFormSelectors, popupSelector, callbackSubmitForm} ){
@@ -55,10 +55,6 @@ export default class PopupWithForm extends Popup {
     //Добавляем сброс кнопки:
     this._formButton.classList.add('popup__save-button_disable');
     this._formButton.setAttribute('disabled', true);
-
-    
   }
-
-
 }
 
