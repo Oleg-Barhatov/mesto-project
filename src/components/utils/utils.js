@@ -27,7 +27,9 @@ export const formSelectors = {
     disabledButton: 'popup__save-button_disable',
     inputError: 'popup__form_type_error',
     errorSpan: '.form__error',
-    errorSpanSuffix: "-error"
+    errorSpanSuffix: "-error",
+    span: '.popup__form-error'
+
 }
 
 
