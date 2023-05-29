@@ -27,7 +27,14 @@ export default class PopupWithForm extends Popup {
     //Возвращаем обьект:
     return this._inputValues
   }
-  
+
+  setInputValues(data) {
+    this._formInputs.forEach((input) => {
+      // тут вставляем в `value` инпута данные из объекта по атрибуту `name` этого инпута
+      input.value = data[input.name];
+    });
+  }
+
   //Публичной метод состояния кнопки при отправке данных:
   renderLoading(isLoading, loadingText='Сохранение...') {
     if (isLoading) {

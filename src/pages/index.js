@@ -45,10 +45,7 @@ editProfileValidation.enableValidation()
 //Открытие попапа редактирования профиля
 elements.buttonRedact.addEventListener('click', () => {
   editFrofile.open(); 
-  const userInfo = user.getUserInfo();
-  elements.nameInput.value = userInfo.userName;
-  elements.aboutInput.value = userInfo.userAbout;
-
+  editFrofile.setInputValues(user.getUserInfo());
 })
 
 //Попап добавления новой карточки
