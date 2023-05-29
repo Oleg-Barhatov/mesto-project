@@ -15,9 +15,11 @@ export default class FormValidator{
       return !input.validity.valid
     })
   }
-  resetErrors = (form) => {
+  resetErrors = (btnState) => {
+    //btnState - принимает булево значение  - если true - знач кнопка  включена
     this._allErrorSpans.map(span => span.innerText = "")
     this._allInputs.map(input => input.classList.remove(this._selectors.inputError))
+    this._btnSetDisabled(!btnState)
 
   }
   _renderValidation(input) {

@@ -30,8 +30,9 @@ const editFrofile = new PopupWithForm({
 
     api.setUserInfo(name, about)
       .then((result) => {
-        document.querySelector(userInfoSelector.name).textContent = result.name;
-        document.querySelector(userInfoSelector.about).textContent = result.about;
+
+        user.setUserInfo(result)
+
         editFrofile.close()
       })
       .catch((error) => { console.log(error) })
@@ -47,6 +48,7 @@ elements.buttonRedact.addEventListener('click', () => {
   const userInfo = user.getUserInfo();
   elements.nameInput.value = userInfo.userName;
   elements.aboutInput.value = userInfo.userAbout;
+
 })
 
 //Попап добавления новой карточки

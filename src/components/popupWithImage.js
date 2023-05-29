@@ -5,8 +5,8 @@ export default class popupWithImage extends Popup {
     super(popupSelector);
     
     //Забираем изображение и подпись
-    this._popupImage = this._popupSelector.querySelector(popupImageSelectors.picture);
-    this._popupFigcaption = this._popupSelector.querySelector(popupImageSelectors.caption);
+    this._popupImage = this._popup.querySelector(popupImageSelectors.picture);
+    this._popupFigcaption = this._popup.querySelector(popupImageSelectors.caption);
 
   }
 
