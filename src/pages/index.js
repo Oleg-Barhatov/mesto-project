@@ -124,6 +124,7 @@ Promise.all(promiseArray)
     .then(([resultUser, items])  => {
         //Вызываем метод класса UserInfo и передаем в него данные о пользователе с сервера:
         user.setUserInfo(resultUser);
+        user.getUseriD()
         const section = new Section({
             items,
             renderer: (item) => {
