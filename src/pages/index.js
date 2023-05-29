@@ -2,7 +2,7 @@ import { popupSelectors, formSelectors, elements,
   userInfoSelector,
   popupImageSelectors, cardSelectors } from '../components/utils/utils.js';
 import Card from '../components/Card.js';
-import api from '../components/api.js';
+import api from '../components/Api.js';
 import PopupWithForm from '../components/popupWithForm.js';
 import popupWithImage from '../components/popupWithImage.js';
 import UserInfo from '../components/userInfo.js';
@@ -124,16 +124,15 @@ Promise.all(promiseArray)
     .then(([resultUser, items])  => {
         //Вызываем метод класса UserInfo и передаем в него данные о пользователе с сервера:
         user.setUserInfo(resultUser);
-        user.getUseriD()
-        const section = new Section({
-            items,
-            renderer: (item) => {
-                const trash = item.owner["_id"] === resultUser["_id"]
-                const liked = likedByMe(item, resultUser["_id"])
-                const card = new Card(item, cardSelectors, cardCallbacks)
-                return card.createCard({trash,liked})
-            }
-        }, elements.cardsSelector)
+        const renderer =  (item) => {
+
+            const trash = item.owner["_id"] === user.getUseriD()
+            const liked = likedByMe(item, user.getUseriD())
+            const card = new Card(item, cardSelectors, cardCallbacks)
+            return card.createCard({trash,liked})
+        }
+        section.renderer = renderer
+        section.items = items
         section.renderItems(true)
     })
     .catch((error) => {console.log(error)});
