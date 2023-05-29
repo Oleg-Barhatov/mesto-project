@@ -10,14 +10,8 @@ export default class PopupWithForm extends Popup {
     this._formInputs = this._popupForm.querySelectorAll(popupFormSelectors.input)
     //Получаем кнопку формы:
     this._formButton = this._popupForm.querySelector(popupFormSelectors.submitButton)
+    //Добавляем слушатель:
 
-    super.setEventListeners();
-    //Добавляем слушатель события формы submit
-    this._popupForm.addEventListener('submit', evt => {
-      evt.preventDefault();
-      //Передаем в callback объект со значениями полей инпута и работаем с ним в index.js с методом api
-      this._callbackSubmitForm(this._getInputValues())
-    })
   }
 
 //Получаем данные полей инпутов:
@@ -50,7 +44,14 @@ export default class PopupWithForm extends Popup {
 
   }
 
-
+  setEventListeners() {
+    super.setEventListeners() 
+    this._popupForm.addEventListener('submit', evt => {
+      evt.preventDefault();
+      //Передаем в callback объект со значениями полей инпута и работаем с ним в index.js с методом api
+      this._callbackSubmitForm(this._getInputValues())
+    })
+  }
 
 
 }
