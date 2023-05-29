@@ -61,11 +61,11 @@ const addCard = new PopupWithForm({
 
     api.addNewCard(name, link)
       .then((result) => {
-        const section = new Section({items:[], renderer: (item) =>{
-            const card = new Card(item, cardSelectors, cardCallbacks)
+        const renderer = () => {
+            const card = new Card(result, cardSelectors, cardCallbacks)
             return card.createCard(
-                {trash: true, liked: false})
-            }}, elements.cardsSelector)
+                {trash: true, liked: false})}
+          section.renderer = renderer
           section.addItem(result)
           addCard.close()
       })
@@ -118,12 +118,12 @@ const cardCallbacks = {onRmvLike: api.rmvCardLike, onSetLike: api.putCardLike,
     onDelete:api.deleteCard, onImageClick: imagePopup.open
 }
 
+const section = new Section({}, elements.cardsSelector)
+
 Promise.all(promiseArray)
     .then(([resultUser, items])  => {
         //Вызываем метод класса UserInfo и передаем в него данные о пользователе с сервера:
         user.setUserInfo(resultUser);
-        //Получаем id пользователя:
-        user.getUseriD()
         const section = new Section({
             items,
             renderer: (item) => {
