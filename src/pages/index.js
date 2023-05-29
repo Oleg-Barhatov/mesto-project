@@ -2,7 +2,7 @@ import { popupSelectors, formSelectors, elements,
   userInfoSelector,
   popupImageSelectors, cardSelectors } from '../components/utils/utils.js';
 import Card from '../components/Card.js';
-import api from '../components/Api.js';
+import api from '../components/api.js';
 import PopupWithForm from '../components/popupWithForm.js';
 import popupWithImage from '../components/popupWithImage.js';
 import UserInfo from '../components/userInfo.js';
@@ -122,6 +122,8 @@ Promise.all(promiseArray)
     .then(([resultUser, items])  => {
         //Вызываем метод класса UserInfo и передаем в него данные о пользователе с сервера:
         user.setUserInfo(resultUser);
+        //Получаем id пользователя:
+        user.getUseriD()
         const section = new Section({
             items,
             renderer: (item) => {
