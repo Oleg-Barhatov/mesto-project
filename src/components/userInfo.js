@@ -14,9 +14,9 @@ export default class UserInfo {
   }
 
   getUseriD() {
-    return {
-      userID: this._userID
-    };
+
+     return this._userID
+
   }
 
   setUserInfo({name, about, avatar, _id}) {
