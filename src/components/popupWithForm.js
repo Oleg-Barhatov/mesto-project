@@ -28,6 +28,7 @@ export default class PopupWithForm extends Popup {
     return this._inputValues
   }
 
+  //Вставляем данные провиля в ипуты формы попапа:
   setInputValues(data) {
     this._formInputs.forEach((input) => {
       // тут вставляем в `value` инпута данные из объекта по атрибуту `name` этого инпута
