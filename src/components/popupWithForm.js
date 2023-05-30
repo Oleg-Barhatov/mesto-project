@@ -10,14 +10,10 @@ export default class PopupWithForm extends Popup {
     this._formInputs = this._popupForm.querySelectorAll(popupFormSelectors.input)
     //Получаем кнопку формы:
     this._formButton = this._popupForm.querySelector(popupFormSelectors.submitButton)
-
-    super.setEventListeners();
-    //Добавляем слушатель события формы submit
-    this._popupForm.addEventListener('submit', evt => {
-      evt.preventDefault();
-      //Передаем в callback объект со значениями полей инпута и работаем с ним в index.js с методом api
-      this._callbackSubmitForm(this._getInputValues())
-    })
+    //Фиксируем текст снопки
+    this._submitBtnText = this._formButton.textContent
+    //Добавляем слушатель:
+    this.setEventListeners();
   }
 
 //Получаем данные полей инпутов:
@@ -31,14 +27,21 @@ export default class PopupWithForm extends Popup {
     //Возвращаем обьект:
     return this._inputValues
   }
-  
+
+  //Вставляем данные провиля в ипуты формы попапа:
+  setInputValues(data) {
+    this._formInputs.forEach((input) => {
+      // тут вставляем в `value` инпута данные из объекта по атрибуту `name` этого инпута
+      input.value = data[input.name];
+    });
+  }
+
   //Публичной метод состояния кнопки при отправке данных:
-  renderLoading(isLoading) {
+  renderLoading(isLoading, loadingText='Сохранение...') {
     if (isLoading) {
-      this._formButton.textContent = 'Сохранение...';
-    }
-    else {
-      this._formButton.textContent = 'Сохранить';
+      this._formButton.textContent = loadingText;
+    } else {
+      this._formButton.textContent = this._submitBtnText;
     }
   }
 
@@ -50,8 +53,13 @@ export default class PopupWithForm extends Popup {
 
   }
 
-
-
-
+  setEventListeners() {
+    super.setEventListeners() 
+    this._popup.addEventListener('submit', evt => {
+      evt.preventDefault();
+      //Передаем в callback объект со значениями полей инпута и работаем с ним в index.js с методом api
+      this._callbackSubmitForm(this._getInputValues())
+    })
+  }
 }
 

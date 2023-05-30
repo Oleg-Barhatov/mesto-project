@@ -8,15 +8,15 @@ export default class UserInfo {
 
   getUserInfo() {
     return {
-      userName: this._userName.textContent,
-      userAbout: this._userAbout.textContent
+      name: this._userName.textContent,
+      about: this._userAbout.textContent
     };
   }
 
   getUseriD() {
-
-     return this._userID
-
+     
+    return this._userID
+    
   }
 
   setUserInfo({name, about, avatar, _id}) {
