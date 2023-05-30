@@ -2,13 +2,13 @@ import { popupSelectors, formSelectors, elements,
   userInfoSelector,
   popupImageSelectors, cardSelectors } from '../components/utils/utils.js';
 import Card from '../components/Card.js';
-import api from '../components/api.js';
-import PopupWithForm from '../components/popupWithForm.js';
-import popupWithImage from '../components/popupWithImage.js';
-import UserInfo from '../components/userInfo.js';
+import api from '../components/Api.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import popupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
 import './index.css';
-import Section from "../components/Section";
-import FormValidator from "../components/FormValidator";
+import Section from "../components/Section.js";
+import FormValidator from "../components/FormValidator.js";
 
 
 function likedByMe(cardObj,userId){
@@ -46,6 +46,7 @@ editProfileValidation.enableValidation()
 elements.buttonRedact.addEventListener('click', () => {
   editFrofile.open(); 
   editFrofile.setInputValues(user.getUserInfo());
+  editProfileValidation.resetErrors(false)
 })
 
 //Попап добавления новой карточки
@@ -76,7 +77,10 @@ const addPopupValidation = new FormValidator(formSelectors,
 addPopupValidation.enableValidation()
 
 //Открытие попапа добавления новой карточки
-elements.buttonPlus.addEventListener('click', () => addCard.open())
+elements.buttonPlus.addEventListener('click', () => {
+  addCard.open()
+  addPopupValidation.resetErrors(false)
+})
 
 //Попап добавления новой аватарки
 const changeAvatar = new PopupWithForm( {
@@ -100,7 +104,10 @@ const changeAvatarValidation = new FormValidator(formSelectors, document.querySe
 changeAvatarValidation.enableValidation()
 
 //Открытие попапа обновления аватара
-elements.avatarRedact.addEventListener('click', () =>{changeAvatar.open()})
+elements.avatarRedact.addEventListener('click', () =>{
+  changeAvatar.open()
+  changeAvatarValidation.resetErrors(false)
+})
 
 
 
