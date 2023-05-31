@@ -12,8 +12,6 @@ export default class PopupWithForm extends Popup {
     this._formButton = this._popupForm.querySelector(popupFormSelectors.submitButton)
     //Фиксируем текст снопки
     this._submitBtnText = this._formButton.textContent
-    //Добавляем слушатель:
-    this.setEventListeners();
   }
 
 //Получаем данные полей инпутов:
