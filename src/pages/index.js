@@ -94,7 +94,7 @@ const changeAvatar = new PopupWithForm( {
 
     api.updateAvatar(avatarLink)
       .then((result) => {
-        document.querySelector(userInfoSelector.avatar).setAttribute('src', result.avatar)
+        user.setUserAvatar(result)
         changeAvatar.close()
       })
       .catch((error) => { console.log(error) })
