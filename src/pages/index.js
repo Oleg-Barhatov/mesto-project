@@ -1,6 +1,11 @@
-import { popupSelectors, formSelectors, elements,
-  userInfoSelector,
-  popupImageSelectors, cardSelectors } from '../utils/utils.js';
+import {
+    cardSelectors,
+    elements,
+    formSelectors,
+    popupImageSelectors,
+    popupSelectors,
+    userInfoSelector
+} from '../utils/utils.js';
 import Card from '../components/Card.js';
 import api from '../components/Api.js';
 
@@ -20,6 +25,11 @@ function likedByMe(cardObj,userId){
         }
     }
     return false
+}
+
+function createCard(item, options){
+    const card = new Card(item, cardSelectors, cardCallbacks)
+    return card.createCard(options)
 }
 
 //Попап редактирования профиля
@@ -61,11 +71,7 @@ const addCard = new PopupWithForm({
 
     api.addNewCard(name, link)
       .then((result) => {
-        const renderer = () => {
-            const card = new Card(result, cardSelectors, cardCallbacks)
-            return card.createCard(
-                {trash: true, liked: false})}
-          section.renderer = renderer
+          section.renderer = ()=>createCard(result, {trash:true, liked:false})
           section.addItem(result)
           addCard.close()
       })
@@ -130,14 +136,11 @@ Promise.all(promiseArray)
     .then(([resultUser, items])  => {
         //Вызываем метод класса UserInfo и передаем в него данные о пользователе с сервера:
         user.setUserInfo(resultUser);
-        const renderer =  (item) => {
-
+        section.renderer = (item) => {
             const trash = item.owner["_id"] === user.getUseriD()
             const liked = likedByMe(item, user.getUseriD())
-            const card = new Card(item, cardSelectors, cardCallbacks)
-            return card.createCard({trash,liked})
+            createCard(item, {trash, liked})
         }
-        section.renderer = renderer
         section.items = items
         section.renderItems(true)
     })
