@@ -1,6 +1,6 @@
 import { popupSelectors, formSelectors, elements,
   userInfoSelector,
-  popupImageSelectors, cardSelectors } from '../components/utils/utils.js';
+  popupImageSelectors, cardSelectors } from '../utils/utils.js';
 import Card from '../components/Card.js';
 import api from '../components/Api.js';
 
