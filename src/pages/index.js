@@ -5,7 +5,7 @@ import Card from '../components/Card.js';
 import api from '../components/Api.js';
 
 import PopupWithForm from '../components/PopupWithForm.js';
-import popupWithImage from '../components/PopupWithImage.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 
 import './index.css';
@@ -116,7 +116,7 @@ elements.avatarRedact.addEventListener('click', () =>{
 //Создаем копию класса UserInfo и передаем селекторы:
 const user = new UserInfo( userInfoSelector)
 
-const imagePopup = new popupWithImage(popupSelectors.popupImage, popupImageSelectors)
+const imagePopup = new PopupWithImage(popupSelectors.popupImage, popupImageSelectors)
 
 const promiseArray = [api.getUserInfo(), api.getCards()]
 

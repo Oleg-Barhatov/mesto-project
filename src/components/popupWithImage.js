@@ -1,6 +1,6 @@
 import Popup from "./Popup";
 
-export default class popupWithImage extends Popup {
+export default class PopupWithImage extends Popup {
   constructor(popupSelector, popupImageSelectors){
     super(popupSelector);
     
