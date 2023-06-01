@@ -100,7 +100,7 @@ const changeAvatar = new PopupWithForm( {
 
     api.updateAvatar(avatarLink)
       .then((result) => {
-        user.setUserAvatar(result)
+        user.setUserInfo(result)
         changeAvatar.close()
       })
       .catch((error) => { console.log(error) })
@@ -139,7 +139,7 @@ Promise.all(promiseArray)
         section.renderer = (item) => {
             const trash = item.owner["_id"] === user.getUseriD()
             const liked = likedByMe(item, user.getUseriD())
-            createCard(item, {trash, liked})
+            return createCard(item, {trash, liked})
         }
         section.items = items
         section.renderItems(true)
