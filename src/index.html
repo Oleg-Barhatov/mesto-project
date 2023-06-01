@@ -58,9 +58,10 @@
         <form class="popup__forms form-profile" novalidate> 
             <fieldset class="popup__input-container">
               <label class="popup__label">
-                <input 
+                <input
+                  name="name" 
                   type="text" 
-                  id='input-Name' 
+                  id='input-name'
                   class="popup__form popup__form-Name" 
                   minlength="2" 
                   maxlength="40" 
@@ -68,12 +69,13 @@
                   data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
                   required
                 >
-                <span class="input-Name-error form__error"></span>
+                <span class="popup__form-error input-name-error"></span>
               </label>
               <label class="popup__label">
                 <input 
+                  name="about"
                   type="text" 
-                  id='input-Job' 
+                  id='input-description'
                   class="popup__form popup__form-Job"  
                   minlength="2" 
                   maxlength="200" 
@@ -81,7 +83,7 @@
                   data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
                   required
                 >
-                <span class="input-Job-error form__error"></span>
+                <span class="popup__form-error input-description-error "></span>
               </label>
               <button type="submit"  class="popup__save-button" name="popup__save-button">Cохранить</button>
             </fieldset>        
@@ -97,8 +99,9 @@
             <fieldset class="popup__input-container">
               <label class="popup__label">
                 <input 
+                  name="name"
                   type="text" 
-                  id="inputTitle" 
+                  id="input-title"
                   class="popup__form popup__form_name" 
                   minlength="2" 
                   maxlength="30" 
@@ -107,22 +110,23 @@
                   data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
                   required
                 >                
-                <span class="inputTitle-error form__error"></span>
+                <span class="popup__form-error input-title-error "></span>
               </label>
               <label class="popup__label">
                 <input 
+                  name="link"
                   type="url" 
-                  id="inputLink" 
+                  id="input-link"
                   class="popup__form"  
                   placeholder="Ссылка на картинку" 
                   required
                 >
-                <span class="inputLink-error form__error"></span>
+                <span class="popup__form-error input-link-error"></span>
               </label>
-              <button type="submit" id='buttonCardSave' class="popup__save-button" name="popup__save-button">Cохранить</button>
+              <button type="submit"  class="popup__save-button" name="popup__save-button">Cохранить</button>
             </fieldset>        
         </form>
-        <button type="button" id='popupClosed' class="popup__close active"></button>
+        <button type="button"  class="popup__close active"></button>
       </div> 
     </div>
   </div> 
@@ -133,19 +137,20 @@
       <form class="popup__forms form-avatar" novalidate> 
           <fieldset class="popup__input-container">
             <label class="popup__label">
-              <input 
+              <input
+                name="avatarLink" 
                 type="url" 
-                id="inputLink" 
+                id="avatar-link"
                 class="popup__form"  
                 placeholder="Ссылка на картинку" 
                 required
               >
-              <span class="inputLink-error form__error"></span>
+              <span class="popup__form-error avatar-link-error "></span>
             </label>
-            <button type="submit" id='buttonCardSave' class="popup__save-button" name="popup__save-button">Cохранить</button>
+            <button type="submit"  class="popup__save-button" name="popup__save-button">Cохранить</button>
           </fieldset>        
       </form>
-      <button type="button" id='popupClosed' class="popup__close active"></button>
+      <button type="button"  class="popup__close active"></button>
     </div> 
   </div>
 </div> 
@@ -159,7 +164,7 @@
   </div>
 
   <template id="templateElement">
-    <article class="element">
+    <article class="element" >
       <img class="element__image">
       <div class="element__box">
         <h2 class="element__title"></h2>
@@ -173,5 +178,4 @@
   </template>
   
 </body>
-
 </html>
